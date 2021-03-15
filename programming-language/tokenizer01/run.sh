@@ -1,0 +1,1 @@
+clear; make; make run; make log

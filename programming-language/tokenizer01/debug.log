@@ -1,0 +1,27 @@
+Enter file path: void main() {
+    float ___a_0213 = 100000000000;
+    char c = 'a';
+    int _0_000____0123_abcdefghjiii_0___ = 9129471947129471924;
+    int _asdas_asd;
+    scanf("%d", _asdas_asd);
+
+
+    if (abc < 100)
+        printf("%d", abc);
+    else if (abc >= 100) {
+        abc += 100;
+
+        for (int i = 0; i <= abc; i*=2) {
+            printf("[%d]", i);
+        abc /= 2;
+        }
+    }
+    
+    while (abc <= 1) 
+        printf("None\n");
+    
+    printf("valid\n\t\n\t\n\t\r");
+    if (a && b || c || a && ___a_0213) printf("%d", 10);
+        printf("%d %f %c %s %a");
+}
+void, main, (, ), {, float, ___a_0213, =, 100000000000, ;, char, c, =, ', a, ', ;, int, _0_000____0123_abcdefghjiii_0___, =, 9129471947129471924, ;, int, _asdas_asd, ;, scanf, (, ", %d, ", ,, _asdas_asd, ), ;, if, (, abc, <, 100, ), printf, (, ", %d, ", ,, abc, ), ;, else, if, (, abc, >=, 100, ), {, abc, +=, 100, ;, for, (, int, i, =, 0, ;, i, <=, abc, ;, i, *=, 2, ), {, printf, (, ", [, %d, ], ", ,, i, ), ;, abc, /=, 2, ;, }, }, while, (, abc, <=, 1, ), printf, (, ", None, \n, ", ), ;, printf, (, ", valid, \n, \t, \n, \t, \n, \t, \r, ", ), ;, if, (, a, &&, b, ||, c, ||, a, &&, ___a_0213, ), printf, (, ", %d, ", ,, 10, ), ;, printf, (, ", %d, %f, %c, %s, %, a, ", ), ;, }, 

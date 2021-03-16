@@ -1,0 +1,9 @@
+Warning[203] C:\USERS\ASYNC\DESKTOP\PIC-LAB\LAB2.ASM 1 : Found opcode in column 1. (CLRF)
+Warning[203] C:\USERS\ASYNC\DESKTOP\PIC-LAB\LAB2.ASM 2 : Found opcode in column 1. (BSF)
+Warning[203] C:\USERS\ASYNC\DESKTOP\PIC-LAB\LAB2.ASM 3 : Found opcode in column 1. (BCF)
+Warning[203] C:\USERS\ASYNC\DESKTOP\PIC-LAB\LAB2.ASM 4 : Found opcode in column 1. (CLRF)
+Message[302] C:\USERS\ASYNC\DESKTOP\PIC-LAB\LAB2.ASM 4 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] C:\USERS\ASYNC\DESKTOP\PIC-LAB\LAB2.ASM 5 : Found opcode in column 1. (BCF)
+Warning[203] C:\USERS\ASYNC\DESKTOP\PIC-LAB\LAB2.ASM 6 : Found opcode in column 1. (BCF)
+Warning[203] C:\USERS\ASYNC\DESKTOP\PIC-LAB\LAB2.ASM 7 : Found opcode in column 1. (BSF)
+Warning[205] C:\USERS\ASYNC\DESKTOP\PIC-LAB\LAB2.ASM 8 : Found directive in column 1. (END)

@@ -19,7 +19,7 @@ int main(int argc, char **argv)
       }
   }
 
-  FILE* m_stream = alfred_open(m_file_path, "a+");
+  FILE* m_stream = alfred_open(m_file_path, "r");
   char* m_source = alfred_read(m_stream);
   printf("%s\n", m_source);
 

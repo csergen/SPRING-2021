@@ -249,12 +249,12 @@ static void s_alfred_addchar(char* lexeme_, char* m_current_char)
 
 void alfred_parse(char* string_)
 {
-  char* m_lexeme = malloc(sizeof(char)*0x64);
+  char* m_lexeme = malloc(sizeof(char)*0x80);
   char m_current_char;
   TOKEN m_token_type;
 
   int m_iterator = 0;
-
+   
   s_alfred_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
   while ( m_iterator <= alfred_length(string_)) 
   {

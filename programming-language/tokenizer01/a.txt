@@ -1,7 +1,7 @@
 void main() {
-    float ___a_0213 = 100000000000;
+    float ___a_0213 = 10000;
     char c = 'a';
-    int _0_000____0123_abcdefghjiii_0___ = 9129471947129471924;
+    int abaklblakfsj_______laksjlkasdjlk = 90110010124231132010201240924;
     int _asdas_asd;
     scanf("%d", _asdas_asd);
 

@@ -1,7 +1,3 @@
-/* sergen cepoglu 
-   alfred library
-   github.com/csergen/alfred */
-
 #pragma once
 #ifndef __ALFRED_H__
 #define __ALFRED_H__
@@ -11,7 +7,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-/************************* INPUT/OUTPUT *************************/
+/************************* FILE *************************/
 FILE* alfred_open(const char *const, const char *const);
 bool alfred_close(FILE *const);
 bool alfred_write(FILE *const, const char *const);
@@ -58,13 +54,13 @@ typedef enum _token_name
   PERCENT,
   LBRACE,
   RBRACE,
-  VBAR,
+  PIPE,
   QUOTE,
   DQUOTE,
   NIL
 } TOKEN;
 
-void alfred_parse(char*);
+void alfred_lexeme(char*);
 
 
 /************************* INPUT/OUTPUT *************************/
@@ -225,7 +221,7 @@ static TOKEN alfred_get_token_type(char char_)
     case '}':
       return RBRACE;
     case '|':
-      return VBAR;
+      return PIPE;
     case '\'':
       return QUOTE;
     case '"':
@@ -247,7 +243,7 @@ static void s_alfred_addchar(char* lexeme_, char* m_current_char)
   alfred_append(lexeme_, *m_current_char);
 }
 
-void alfred_parse(char* string_)
+void alfred_lexeme(char* string_)
 {
   char* m_lexeme = malloc(sizeof(char)*0x90);
   char m_current_char;
@@ -298,7 +294,7 @@ void alfred_parse(char* string_)
     case PERCENT:
     case LBRACE:
     case RBRACE:
-    case VBAR:
+    case PIPE:
     case QUOTE:
     case DQUOTE:
       s_alfred_addchar(m_lexeme, &m_current_char);
@@ -347,9 +343,9 @@ void alfred_parse(char* string_)
         }
         break;
       break;
-      case VBAR:
+      case PIPE:
         switch (m_token_type) {
-        case VBAR:
+        case PIPE:
           s_alfred_addchar(m_lexeme, &m_current_char);
           s_alfred_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
         }
@@ -370,6 +366,44 @@ void alfred_parse(char* string_)
   free(m_lexeme);
 }
 /************************* TOKENIZER *************************/
+
+
+/************************* PARSER *************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************* PARSER *************************/
 
 
 #endif // __ALFRED_H_

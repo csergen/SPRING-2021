@@ -7,4 +7,4 @@ RUN dnf install -y valgrind
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 
-CMD ["make"]
+CMD ["gcc", "-o", "tokenizer", "tokenizer.c"]

@@ -1,0 +1,33 @@
+<id>: a-Z | 0-9 | _
+
+<cond-operator>: > | < | <= | >= | == | != | && | ||
+
+<type>: int | float | char | void
+
+<arithmetic-operator>: + | - | * | / | += | -= | *= | /= | ++ | --
+
+
+<cond-expr>: <id> <cond-operator> <id>
+
+<arithmetic-expr>: <id> <arithmetic-operator> [ <arithmetic-expr> ];
+
+<assign-expr>: [<type>] <id> = <id>; |
+               <id> = <id>;          |
+               <type> <id>;
+               
+
+<if-expr>: if (<cond-expr>) { <sentence> }
+           { elseif (<cond-expr>) <sentence> }
+           [ else <sentence> ]
+
+<while-expr>: while ({ <cond-expr> }) <sentence>
+
+<for-expr>: for (<assign-expr>; <cond-expr>; <arithmetic-expr>) <sentence>
+
+
+<sentence>: { <assign-expr> }  |
+            { <if-expr>     }  |
+            { <while-expr>  }  |
+            { <for-expr>    }
+
+<program-main>: <type> main () { { <sentence> } }

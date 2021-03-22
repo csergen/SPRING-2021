@@ -1,13 +1,13 @@
 <id>: a-Z | 0-9 | _
 
-<cond-operator>: > | < | <= | >= | == | != | && | ||
+<logic-operator>: > | < | <= | >= | == | != | && | ||
 
 <type>: int | float | char | void
 
 <arithmetic-operator>: + | - | * | / | += | -= | *= | /= | ++ | --
 
 
-<cond-expr>: <id> <cond-operator> <id>
+<logic-expr>: <id> <logic-operator> <id>
 
 <arithmetic-expr>: <id> <arithmetic-operator> [ <arithmetic-expr> ];
 
@@ -16,8 +16,8 @@
                <type> <id>;
                
 
-<if-expr>: if (<cond-expr>) { <sentence> }
-           { elseif (<cond-expr>) <sentence> }
+<if-expr>: if (<logic-expr>) { <sentence> }
+           { elseif (<logic-expr>) <sentence> }
            [ else <sentence> ]
 
 <while-expr>: while ({ <cond-expr> }) <sentence>

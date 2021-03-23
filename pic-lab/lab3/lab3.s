@@ -1,0 +1,17 @@
+;=========== lab3.asm ============
+LIST P=16F877A
+INCLUDE	"P16F877A.INC"
+
+ORG	0x000
+CLRF	PORTB	; clear PORTB (BANK0)
+BANKSEL TRISB	; BANK0 -> BANK1
+CLRF	TRISB	; clear TRISB (BANK1)
+BANKSEL	PORTB	; BANK1 -> BANK0
+
+_start
+	MOVLW	0x55	; W <-- 0x55
+	MOVWF	PORTB	; PORTB	<-- W
+
+_loop
+	GOTO	_loop
+	END

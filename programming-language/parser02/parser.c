@@ -196,7 +196,7 @@ void alfred_append(char *string_, char char_)
 /************************* STRING *************************/
 
 /************************* TOKENIZER *************************/
-static TOKEN alfred_get_token_type(char char_)
+TOKEN alfred_get_token_type(char char_)
 {
    CHR_TYPE m_char_type = alfred_type(char_);
    switch (m_char_type)
@@ -259,29 +259,26 @@ static TOKEN alfred_get_token_type(char char_)
    return NIL;
 }
 
-static void s_alfred_getchar(char *string_, int *iter_, char *current_char_, TOKEN *token_type_)
+void s_alfred_getchar(char *string_, int *iter_, char *current_char_, TOKEN *token_type_)
 {
    *current_char_ = string_[(*iter_)++];
    *token_type_ = alfred_get_token_type(*current_char_);
 }
 
-static void s_alfred_addchar(char *lexeme_, char *m_current_char)
+void s_alfred_addchar(char *lexeme_, char *m_current_char)
 {
    alfred_append(lexeme_, *m_current_char);
 }
 
-char** alfred_lexeme(char *string_)
+int alfred_lexeme(char *string_, char **lexemes_)
 {
-   char** m_lexemes = malloc(sizeof(char*)*1000);
-   for (int i = 0; i < 1000; i++) 
-      m_lexemes[i] = malloc(sizeof(char)+1);
-
-   char *m_lexeme = malloc(sizeof(char) * 0x90);
+   char *m_lexeme = calloc(sizeof(char), 0x80);
    char m_current_char;
    TOKEN m_token_type;
 
    int m_iterator = 0;
-   int m_lexeme_iterator = 0;
+
+   int lexeme_iter = 0;
 
    s_alfred_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
    while (m_iterator <= alfred_length(string_))
@@ -396,20 +393,26 @@ char** alfred_lexeme(char *string_)
       }
 
       if (alfred_length(m_lexeme) > 0) {
-         memcpy(m_lexemes[m_lexeme_iterator++], m_lexeme, sizeof(m_lexeme)+1);
-         printf("%s, ", m_lexemes[m_lexeme_iterator-1]);
+         memcpy(lexemes_[lexeme_iter], m_lexeme, sizeof(m_lexeme)+1);
+         lexeme_iter++;
       }
 
       memset(m_lexeme, 0, sizeof(m_lexeme) + 1);
 
       if (m_token_type == NIL)
          s_alfred_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
+
    }
 
    free(m_lexeme);
-
-   return m_lexemes;
+   return lexeme_iter;
 }
+
+void alfred_parse(char **lexemes_, int size_)
+{
+
+}
+
 
 int main(int argc, char **argv)
 {
@@ -432,15 +435,21 @@ int main(int argc, char **argv)
 
    FILE *m_stream = alfred_open(m_file_path, "a+");
    char *m_source = alfred_read(m_stream);
-   //printf("%s\n", m_source);
 
    alfred_fit(m_source);
 
-   char** m_lexemes = malloc(sizeof(char*));
+   char **m_lexemes = malloc(sizeof(char*) * alfred_length(m_source));
+   for (int i = 0; i < alfred_length(m_source); i++)
+      m_lexemes[i] = malloc(sizeof(char));
 
-   printf("%s \n", m_lexemes[0]);
+   int size = alfred_lexeme(m_source, m_lexemes);
 
-   alfred_lexeme(m_source);
+   //for (int i = 0; i < size; i++)
+      //printf("%s ", m_lexemes[i]);
+   
+   alfred_parse(m_lexemes, size);
+
    alfred_close(m_stream);
    free(m_source);
+   free(m_lexemes);
 }

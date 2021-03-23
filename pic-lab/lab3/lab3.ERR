@@ -1,0 +1,9 @@
+Warning[205] C:\USERS\ASYNC\SOURCE\SPRING-2021\PIC-LAB\LAB3\LAB3.S 2 : Found directive in column 1. (LIST)
+Warning[205] C:\USERS\ASYNC\SOURCE\SPRING-2021\PIC-LAB\LAB3\LAB3.S 3 : Found directive in column 1. (INCLUDE)
+Warning[205] C:\USERS\ASYNC\SOURCE\SPRING-2021\PIC-LAB\LAB3\LAB3.S 5 : Found directive in column 1. (__CONFIG)
+Warning[205] C:\USERS\ASYNC\SOURCE\SPRING-2021\PIC-LAB\LAB3\LAB3.S 8 : Found directive in column 1. (ORG)
+Warning[203] C:\USERS\ASYNC\SOURCE\SPRING-2021\PIC-LAB\LAB3\LAB3.S 9 : Found opcode in column 1. (CLRF)
+Warning[205] C:\USERS\ASYNC\SOURCE\SPRING-2021\PIC-LAB\LAB3\LAB3.S 10 : Found directive in column 1. (BANKSEL)
+Warning[203] C:\USERS\ASYNC\SOURCE\SPRING-2021\PIC-LAB\LAB3\LAB3.S 11 : Found opcode in column 1. (CLRF)
+Message[302] C:\USERS\ASYNC\SOURCE\SPRING-2021\PIC-LAB\LAB3\LAB3.S 11 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] C:\USERS\ASYNC\SOURCE\SPRING-2021\PIC-LAB\LAB3\LAB3.S 12 : Found directive in column 1. (BANKSEL)

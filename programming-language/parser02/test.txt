@@ -1,52 +1,10 @@
-void main() {
-   int a = 0;
-   float b = 0;
-   char = 'c';
-   
-   printf("%d\n", a);
-   printf("%f\n", b);
-   printf("%c\n", c);
-
-   int _00_a;
-   float _11_b;
-   char _22_c;
-
-   scanf("%d", &_00_a);
-   scanf("%f", &_11_b);
-   scanf("%c", &_22_c);
-
-   
-   int __a__ = 100;
-   float __b__ = 200;
-   char __c__ = 'A';
-
-   if (__a__ < __b__) {
-      if (__c__ == 64) {
-         for (int i = 0; i < __c__; i++)
-            printf("%d ", i);
-      } elseif (__a__ <= __b__) {
-         for (int i = __a__; i >= 0; i--)
-            printf("%d, ", i);
-      } elseif (__c__ >= 60) {
-         for (int i = 0; i <= 100; i*=2)
-            printf("%d", i);
-      } else {
-         int a = 0;
-         while (a < 100) {
-            if (a%2 == 0)
-               printf("c%d", a);
-            else
-               printf("t%d", a);
-            a+=1;
-         }
-      }
-   }
-
-   if (__a__&&__b__) {
-      printf("a and b");
-   }
-   elseif (__a__||__b__) {
-      printf("a or b");
-   }
-
+main()
+{
+  int a, b, c;
+  a = b;
+  a += b;
+  a -= b;
+  a *= b;
+  a /= b;
+  int x = c;
 }

@@ -1,0 +1,11 @@
+<program-main>: [<type_expr>] main () { { <sentence> } }
+
+<sentence>: { <assign_expr> } ||
+            { <if_expr> } ||
+            { <for_expr> } ||
+            { <while_expr> } ||
+            { <sentence> }
+
+<assign_expr>: [<type_expr>] <id> {, <id>}; ||
+               [<type_expr>] <id> <assign_opr> <id>; ||
+               <id> <assign_opr> <id>; ||

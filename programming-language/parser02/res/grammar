@@ -1,11 +1,41 @@
-<program-main>: [<type_expr>] main () { { <sentence> } }
+<program>: [int | void] main () <scope>
 
-<sentence>: { <assign_expr> } ||
-            { <if_expr> } ||
-            { <for_expr> } ||
-            { <while_expr> } ||
-            { <sentence> }
+<sentences>: { <sentence> }
 
-<assign_expr>: [<type_expr>] <id> {, <id>}; ||
-               [<type_expr>] <id> <assign_opr> <id>; ||
-               <id> <assign_opr> <id>; ||
+<sentence>: 
+  ;             |
+  <scope>       |
+  <declaration> |
+  <assign>      |
+  <ifstmt>      |
+  <forstmt>     |
+  <whilestmt>   |
+
+<declaration>:
+  <type> <id> {, <id>}
+
+<type>:
+  int | float | double | char | void
+
+<id>: _a-Z0-9
+
+<scope>: '{' <sentences> '}'
+
+<assign>:
+  [<type>] <id> ( = | += | -= | *= | /= ) <expression>
+
+{* <conj> || <conj> || <conj> || ... *}
+<expression>: <conj> { || <conj> }
+
+{* <relation> && <relation> && <relation> && ... *}
+<conj>: <relation> { && <relation> }
+
+<relation>: <addition> { [ < | <= | > | >= | == | != ] addition}
+
+<addition>: <term> { (+ | -) <term> }
+
+<term>: <negation> { (* | /) <negation> }
+
+<negation>: ! <factor>
+
+<factor>: <id> | <literal> | (<expression>)

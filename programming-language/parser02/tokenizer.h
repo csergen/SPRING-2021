@@ -57,7 +57,8 @@ typedef enum _token_name
    FORMATSTRING,     // 49
    FORMATFLOAT,      // 50
    NEWLINE,          // 51
-   NIL               // 52
+   BANG,             // 52
+   NIL               // 53
 } TOKEN;
 
 TOKEN get_token_type(char char_)

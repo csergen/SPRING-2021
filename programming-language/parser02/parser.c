@@ -41,7 +41,8 @@ int main(int argc, char **argv)
       m_lexemes[i] = calloc(0x100, sizeof(char));
 
    int size;
-   parse((size=lexeme(m_source, m_lexemes)), m_lexemes);
+   size=lexeme(m_source, m_lexemes);
+   parse(size, m_lexemes);
 
    for (int i = 0; i < size; i++)
       free(m_lexemes[i]);

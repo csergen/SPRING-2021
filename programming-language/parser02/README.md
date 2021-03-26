@@ -14,5 +14,7 @@
   $ sudo docker build -t parser-img .
   $ sudo docker run -it --rm --name parser parser-img
   $ sudo systemctl stop docker.socket
-  
 ```
+
+### State Machine Diagram:
+[smd](res/sm.png)

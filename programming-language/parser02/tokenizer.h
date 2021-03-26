@@ -58,6 +58,8 @@ typedef enum _token_name
    FORMATFLOAT,      // 50
    NEWLINE,          // 51
    BANG,             // 52
+   INCREASE,         // 53
+   DECREASE,         // 54
    NIL               // 53
 } TOKEN;
 
@@ -202,6 +204,10 @@ TOKEN get_final_token_type(char *lexeme_)
       return SLASHEQUAL;
    if (strcmp(lexeme_, "%=") == 0)
       return PERCENTEQUAL;
+   if (strcmp(lexeme_, "++") == 0)
+      return INCREASE;
+   if (strcmp(lexeme_, "--") == 0)
+      return DECREASE;
    if (strcmp(lexeme_, "%d") == 0)
       return FORMATINT;
    if (strcmp(lexeme_, "%s") == 0)
@@ -335,6 +341,18 @@ int lexeme(char *string_, char **lexemes_)
                      case EQUAL:
                         s_addchar(m_lexeme, &m_current_char);
                         s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
+                        break;
+                     case PLUS:
+                        if (temp_type == PLUS) {
+                           s_addchar(m_lexeme, &m_current_char);
+                           s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
+                        }
+                        break;
+                     case MINUS:
+                        if (temp_type == MINUS) {
+                           s_addchar(m_lexeme, &m_current_char);
+                           s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
+                        }
                         break;
                   }
                   break;

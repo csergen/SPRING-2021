@@ -55,7 +55,8 @@ void ifstmt()
   if (s_current_token == IF)
   {
     next_token();
-    if (s_current_token == LPAR) {
+    if (s_current_token == LPAR)
+    {
       next_token();
       expression();
 
@@ -66,9 +67,11 @@ void ifstmt()
     }
   }
 
-  if (s_current_token == ELSEIF) {
+  if (s_current_token == ELSEIF)
+  {
     next_token();
-    if (s_current_token == LPAR) {
+    if (s_current_token == LPAR)
+    {
       next_token();
       expression();
 
@@ -80,22 +83,67 @@ void ifstmt()
     }
   }
 
-  if (s_current_token == ELSE) {
+  if (s_current_token == ELSE)
+  {
     next_token();
     scope();
 
-    if (s_current_token == ELSE) {
+    if (s_current_token == ELSE)
       error("unexpected definition");
-    }
   }
 }
 
 void forstmt()
 {
+  if (s_current_token == FOR)
+  {
+    next_token();
+
+    if (s_current_token == LPAR)
+    {
+      next_token();
+      assign();
+      if (s_current_token == SEMI)
+      {
+        next_token();
+        expression();
+        if (s_current_token == SEMI)
+        {
+          next_token();
+          assign();
+
+          if (s_current_token == RPAR) {
+            next_token();
+            scope();
+          } else
+              error("expected ')'");
+        } else
+            error("expected ';'");
+      } else
+          error("expected ';'");
+    } else
+        error("expected '('");
+  } else
+    error("unexpected definition");
 }
 
 void whilestmt()
 {
+  if (s_current_token == WHILE) {
+    next_token();
+    if (s_current_token == LPAR) {
+      next_token();
+      expression();
+      if (s_current_token == RPAR) {
+        next_token();
+        scope();
+      }
+      else
+        error("expected ')'");
+    } else 
+        error("expected '('");
+  } else
+      error("unexpected definition");
 }
 
 bool ttype()
@@ -141,7 +189,9 @@ void factor()
 
 void negation()
 {
-  if (s_current_token == BANG) 
+  if (s_current_token == BANG)
+    next_token();
+  if (s_current_token == MINUS)
     next_token();
   factor();
 }
@@ -150,7 +200,7 @@ void term()
 {
   negation();
 
-  while (s_current_token == STAR || s_current_token == SLASH)
+  while (s_current_token == STAR || s_current_token == SLASH || s_current_token == PERCENT)
   {
     next_token();
     negation();
@@ -212,22 +262,24 @@ void assign()
   {
     next_token();
 
-    switch (s_current_token)
-    {
-    case EQUAL:
-    case PLUSEQUAL:
-    case MINUSEQUAL:
-    case STAREQUAL:
-    case SLASHEQUAL:
+    if (s_current_token == INCREASE || s_current_token == DECREASE)
       next_token();
-      expression();
-      break;
+    else
+    {
+      switch (s_current_token)
+      {
+      case EQUAL:
+      case PLUSEQUAL:
+      case MINUSEQUAL:
+      case STAREQUAL:
+      case SLASHEQUAL:
+      case PERCENTEQUAL:
+        next_token();
+        expression();
+        break;
+      }
     }
   }
-
-  if (s_current_token != SEMI)
-    error("expected ';'");
-  next_token();
 }
 
 void sentences()
@@ -248,6 +300,9 @@ void sentences()
     case DQUOTE:
     case IDENTIFIER:
       assign();
+      if (s_current_token != SEMI)
+        error("expected ';'");
+      next_token();
       break;
     case IF:
       ifstmt();

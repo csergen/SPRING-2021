@@ -43,3 +43,5 @@
 <ifstmt>: if ({ <expression> }) <scope>
           { elseif ( { <expression> } ) <scope> }
           [ else <scope> ]
+
+<forstmt>: for ([<assign>]; [<expression>]; [<id><assign>]) <scope>

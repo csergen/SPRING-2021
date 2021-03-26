@@ -102,6 +102,9 @@ void next_token()
   }
 }
 
+/* <ifstmt>: if ({ <expression> }) <scope>
+          { elseif ( { <expression> } ) <scope> }
+          [ else <scope> ] */
 void ifstmt()
 {
   if (s_current_token == IF)
@@ -145,6 +148,7 @@ void ifstmt()
   }
 }
 
+/* <forstmt>: for ([<assign>]; [<expression>]; [<assign>]) <scope> */
 void forstmt()
 {
   if (s_current_token == FOR)
@@ -179,6 +183,7 @@ void forstmt()
     error("unexpected definition");
 }
 
+/* <whilestmt>: while ( [<expression>] ) <scope> */
 void whilestmt()
 {
   if (s_current_token == WHILE) {
@@ -198,6 +203,7 @@ void whilestmt()
       error("unexpected definition");
 }
 
+/* <type>: int | float | double | char | void */
 bool ttype()
 {
   switch (s_current_token)
@@ -213,6 +219,7 @@ bool ttype()
   return false;
 }
 
+/* <factor>: <id> | <number> | <quote> | <dquote> */
 void factor()
 {
   if (s_current_token == IDENTIFIER || s_current_token == NUMBER)
@@ -239,6 +246,8 @@ void factor()
     error("invalid factor");
 }
 
+/* {* !a | !0 *}
+   <negation>: ! <factor> */
 void negation()
 {
   if (s_current_token == BANG)
@@ -248,6 +257,8 @@ void negation()
   factor();
 }
 
+/* {* <negation> * <negation> / <negation> .... *}
+   <term>: <negation> { (* | /) <negation> } */
 void term()
 {
   negation();
@@ -259,6 +270,8 @@ void term()
   }
 }
 
+/* {* <term> + <term> - <term> ..... *}
+   <addition>: <term> { (+ | -) <term> } */
 void addition()
 {
   term();
@@ -270,6 +283,8 @@ void addition()
   }
 }
 
+/* {* <addition> < <addition> <= <addition> > <addition> >= <addition> == <addition> != <addition>  .... *}
+   <relation>: <addition> { [ < | <= | > | >= | == | != ] addition */
 void relation()
 {
   addition();
@@ -283,6 +298,8 @@ void relation()
   }
 }
 
+/* {* <relation> && <relation> && <relation> && ... *}
+   <conj>: <relation> { && <relation> } */
 void conjuction()
 {
   relation();
@@ -294,6 +311,9 @@ void conjuction()
   }
 }
 
+/* 
+  {* <conj> || <conj> || <conj> || ... *}
+  <expression>: <conj> { || <conj> } */
 void expression()
 {
   conjuction();
@@ -305,6 +325,7 @@ void expression()
   }
 }
 
+/* <assign>: [<type>] <id> ( = | += | -= | *= | /= ) <expression> */
 void assign()
 {
   if (ttype())
@@ -334,6 +355,15 @@ void assign()
   }
 }
 
+/* <sentences>: { <sentence> } 
+
+<sentence>: 
+  <scope>       |
+  <assign>      |
+  <ifstmt>      |
+  <forstmt>     |
+  <whilestmt>   |
+*/
 void sentences()
 {
   while (s_current_token != RBRACE && s_current_token != NIL)
@@ -375,6 +405,7 @@ void sentences()
   }
 }
 
+/* <scope>: '{' <sentences> '}' */
 void scope()
 {
   if (s_current_token == LBRACE)
@@ -389,6 +420,7 @@ void scope()
     error("expected '{'");
 }
 
+/* <program>: [int | void] main () <scope> */
 void program()
 {
   if (s_current_token == INT || s_current_token == VOID)

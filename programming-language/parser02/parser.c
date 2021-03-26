@@ -2,10 +2,21 @@
 // 02190201200
 // info.sergencepoglu@gmail.com | 02190201200@ogr.inonu.edu.tr
 
+#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+   #define OS "WIN"
+#elif defined(__linux__)
+   #define OS "LINUX"
+#else
+   #ifndef OS
+      #define NULL
+      #pragma message "OS was not recognized"
+   #endif
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
+#include <ctype.h>
 
 #include "fileopr.h"
 #include "stropr.h"

@@ -1,3 +1,10 @@
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+
 clear
 gcc -g -o parser.o parser.c
-./parser.o test.txt
+echo -e "${red}=======${green}$(date)${reset}${red}======${reset}" >> log.txt
+./parser.o test.txt >> log.txt
+echo -e "${red}____________________________________________${reset}\n"  >> log.txt
+cat log.txt

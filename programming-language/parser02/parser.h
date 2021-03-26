@@ -11,26 +11,26 @@ static char **s_current_lexemes;
 static int s_size;
 // GLOBAL PROPERTIES in Parser
 
-bool sentences();
-bool scope();
-bool program();
-bool sentence();
-bool assign();
-bool ifstmt();
-bool forstmt();
-bool whilestmt();
-bool expression();
-bool conjuction();
-bool relation();
-bool addition();
-bool term();
-bool negation();
-bool factor();
+void sentences();
+void scope();
+void program();
+void sentence();
+void assign();
+void ifstmt();
+void forstmt();
+void whilestmt();
+void expression();
+void conjuction();
+void relation();
+void addition();
+void term();
+void negation();
+void factor();
 bool ttype();
 
 void error(char *s)
 {
-  printf("error: %s\n", s);
+  printf("error: %s ....%s\n%s\n^\n", s, s_current_lexeme, s_current_lexeme);
   exit(true);
 }
 
@@ -45,18 +45,20 @@ void next_token()
   else
   {
     s_current_token = NIL;
+    memset(s_current_lexeme, 0, sizeof(s_current_lexeme) + 1);
+    s_current_lexeme = NULL;
   }
 }
 
-bool ifstmt()
+void ifstmt()
 {
 }
 
-bool forstmt()
+void forstmt()
 {
 }
 
-bool whilestmt()
+void whilestmt()
 {
 }
 
@@ -75,7 +77,7 @@ bool ttype()
   return false;
 }
 
-bool factor()
+void factor()
 {
   if (s_current_token == IDENTIFIER || s_current_token == NUMBER)
     next_token();
@@ -83,14 +85,14 @@ bool factor()
     error("invalid factor");
 }
 
-bool negation()
+void negation()
 {
   if (s_current_token == BANG)
     next_token();
   factor();
 }
 
-bool term()
+void term()
 {
   negation();
 
@@ -101,7 +103,7 @@ bool term()
   }
 }
 
-bool addition()
+void addition()
 {
   term();
 
@@ -112,20 +114,20 @@ bool addition()
   }
 }
 
-bool relation()
+void relation()
 {
   addition();
 
   while (s_current_token == LESS || s_current_token == LESSEQUAL ||
-         s_current_token == GREATER || s_current_token == GREATEREQUAL ||
-         s_current_token == EQEQUAL || s_current_token == NOTEQUAL)
+        s_current_token == GREATER || s_current_token == GREATEREQUAL ||
+        s_current_token == EQEQUAL || s_current_token == NOTEQUAL)
   {
     next_token();
     addition();
   }
 }
 
-bool conjuction()
+void conjuction()
 {
   relation();
 
@@ -136,7 +138,7 @@ bool conjuction()
   }
 }
 
-bool expression()
+void expression()
 {
   conjuction();
 
@@ -147,13 +149,10 @@ bool expression()
   }
 }
 
-bool assign()
+void assign()
 {
   if (ttype())
     next_token();
-
-  if (s_current_token == SEMI)
-    return false;
 
   if (s_current_token == IDENTIFIER)
   {
@@ -168,52 +167,66 @@ bool assign()
     case SLASHEQUAL:
       next_token();
       expression();
+      break;
     }
   }
 
-  if (s_current_token == SEMI)
-    next_token();
-  else
+  if (s_current_token != SEMI)
     error("expected ';'");
+  next_token();
 }
 
-bool sentences()
+void sentences()
 {
-  switch (s_current_token)
+  while (s_current_token != RBRACE && s_current_token != NIL)
   {
-  case LBRACE:
-    scope();
-  case INT:
-  case FLOAT:
-  case DOUBLE:
-  case CHAR:
-  case VOID:
-    assign();
-  case IF:
-    ifstmt();
-  case FOR:
-    forstmt();
-  case WHILE:
-    whilestmt();
+    switch (s_current_token)
+    {
+    case LBRACE:
+      scope();
+      break;
+    case INT:
+    case FLOAT:
+    case DOUBLE:
+    case CHAR:
+    case VOID:
+    case QUOTE:
+    case DQUOTE:
+    case IDENTIFIER:
+      assign();
+      break;
+    case IF:
+      ifstmt();
+      break;
+    case FOR:
+      forstmt();
+      break;
+    case WHILE:
+      whilestmt();
+      break;
+    case PRINTF:
+      break;
+    case SCANF:
+      break;
+    }
   }
 }
 
-bool scope()
+void scope()
 {
   if (s_current_token == LBRACE)
   {
-    while (s_current_token != NIL && s_current_token != RBRACE) {
-      next_token();
-      sentences();
-    }
+    next_token();
+    sentences();
     if (s_current_token != RBRACE)
       error("expected '}'");
+    next_token();
   }
   else
     error("expected '{'");
 }
 
-bool program()
+void program()
 {
   if (s_current_token == INT || s_current_token == VOID)
     next_token();
@@ -229,6 +242,10 @@ bool program()
       {
         next_token();
         scope();
+        
+        if (s_current_token != NIL) {
+          error("out of scope");
+        }
       }
       else
         error("expected ')'");
@@ -238,8 +255,6 @@ bool program()
   }
   else
     error("undefined reference to 'main'");
-
-  return false;
 }
 
 void parse(int size, char **lexemes)
@@ -250,6 +265,8 @@ void parse(int size, char **lexemes)
 
   next_token();
   program();
+
+  printf("info: not error\n");
 }
 
 #endif

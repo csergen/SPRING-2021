@@ -52,6 +52,19 @@ void next_token()
 
 void ifstmt()
 {
+  if (strcmp(s_current_lexeme, "if") == 0)
+  {
+    next_token();
+    if (s_current_token == LPAR) {
+      next_token();
+      expression();
+
+      if (s_current_token != RPAR)
+        error("expected ')'");
+      next_token();
+      scope();
+    }
+  }
 }
 
 void forstmt()
@@ -81,6 +94,24 @@ void factor()
 {
   if (s_current_token == IDENTIFIER || s_current_token == NUMBER)
     next_token();
+  else if (s_current_token == QUOTE)
+  {
+    next_token();
+    factor();
+
+    if (s_current_token != QUOTE)
+      error("missing terminating ' character");
+    next_token();
+  }
+  else if (s_current_token == DQUOTE)
+  {
+    next_token();
+    factor();
+
+    if (s_current_token != DQUOTE)
+      error("missing terminating \" character");
+    next_token();
+  }
   else
     error("invalid factor");
 }
@@ -119,8 +150,8 @@ void relation()
   addition();
 
   while (s_current_token == LESS || s_current_token == LESSEQUAL ||
-        s_current_token == GREATER || s_current_token == GREATEREQUAL ||
-        s_current_token == EQEQUAL || s_current_token == NOTEQUAL)
+         s_current_token == GREATER || s_current_token == GREATEREQUAL ||
+         s_current_token == EQEQUAL || s_current_token == NOTEQUAL)
   {
     next_token();
     addition();
@@ -242,8 +273,9 @@ void program()
       {
         next_token();
         scope();
-        
-        if (s_current_token != NIL) {
+
+        if (s_current_token != NIL)
+        {
           error("out of scope");
         }
       }

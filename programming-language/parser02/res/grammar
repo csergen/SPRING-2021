@@ -39,3 +39,7 @@
 <negation>: ! <factor>
 
 <factor>: <id> | <literal> | (<expression>)
+
+<ifstmt>: if ({ <expression> }) <scope>
+          { elseif ( { <expression> } ) <scope> }
+          [ else <scope> ]

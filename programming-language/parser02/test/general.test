@@ -6,6 +6,7 @@ int main()
   char c = 'c';
   char s = "string";
 
+
   b += a;
   b -= a + b * d;
   d *= a / b + d + c / 2 - 10 + b || c;

@@ -1,10 +1,12 @@
-red=`tput setaf 1`
-green=`tput setaf 2`
-reset=`tput sgr0`
+if [ "$EUID" -ne 0 ]
+  then echo "run as root"
+  exit
+fi
 
-clear
-gcc -g -o parser.o parser.c
-echo -e "${red}=======${green}$(date)${reset}${red}======${reset}" >> log.txt
-./parser.o if.test >> log.txt
-echo -e "${red}____________________________________________${reset}\n"  >> log.txt
-cat log.txt
+PROGRAM="parser"
+PROGRAM_IMAGE="$PROGRAM-img"
+
+sudo systemctl start docker
+sudo docker build -t $PROGRAM_IMAGE .
+sudo docker run -it --rm --name $PROGRAM $PROGRAM_IMAGE
+sudo systemctl stop docker.socket

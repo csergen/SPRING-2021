@@ -5,9 +5,9 @@
 /*******************************************************************************
 PARSERIN TANIMADIGI IFADELER:
 (bu ifadeler tanimlanirsa program hata verir ancak dogru bir hata olmaz
-   bkz: else if ) bu ifadede program hata verir ancak '(' parantezin olmamasindan degil
-   else if ifadesinin bitisik yazilmamasindan dolayi hata verir ve program dogru cikti uretmemis olur ancak,
-   elseif ) yapilirsa program '(' parantezin olmamasindan dolayi hata verir ve dogru bir cikti uretmis oluruz.
+   bkz: else if ) bu ifadede program hata verir ancak '(' parantezin olmamasindan degil de
+   else if ifadesinin bitisik yazilmamasindan dolayi hata verir ve program dogru cikti uretmemis olur ancak
+   elseif ) yapilirsa program '(' parantezin olmamasindan dolayi hata verir ve dogru bir cikti uretmis olur.
 )
 
 0) fonksiyon tanimi, return ifadeleri, pointer, adres gibi ifadeleri taniyamiyor.
@@ -47,9 +47,23 @@ PARSERIN TANIMADIGI IFADELER:
 
 10) commentlari tanimiyor
 
+11) for (), for (;;), while() gibi parantezin icinin bos oldugu ifadeleri tanimiyor ( while(1) taniyor )
 
-NOT: gcc ile linux uzerinde compile edilirse sorunsuz calisacaktir. windowsda calismiyor.
-NOT: kaynak dosyasinin ici bos olursa hata verecektir.
+12) Kaynak dosyasinin ici bos olursa hata verecektir. (Segm. fau.)
+
+NOT: gcc ile linux uzerinde compile edilirse sorunsuz(60-50%) calisacaktir. (windows'ta (MINGW) calismiyor karakter hatasi veriyor.)
+NOT: Programin hatasiz cikti verebilmesi icin DOCKER kullanilabilir.
+   ! Dockerfile icindeki  CMD ["./parser", "KAYNAKDOSYASI"] KAYNAKDOSYASI yerine test edilecek test dosyasinin yolu
+   verilebilir. (AYNI DIZINDE veya AYNI DIZIN ICINDEKI DOSYALARIN ALTINDA OLMAK SARTIYLA)
+
+   $ sudo run.sh                                   // build and run
+
+      or
+
+   $ sudo systemctl start docker                   // start docker
+   $ sudo docker build . -t parser-img             // build image (-t is tag)
+   $ docker run -it --rm --name parser parser-img  // run docker image
+   $ sudo systemctl stop docker.socket             // stop docker
 ********************************************************************************/
 
 #if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
@@ -58,8 +72,7 @@ NOT: kaynak dosyasinin ici bos olursa hata verecektir.
    #define OS "LINUX"
 #else
    #ifndef OS
-      #define NULL
-      #pragma message "OS was not recognized"
+      #error "OS was not recognized. (ABORTED)"
    #endif
 #endif
 
@@ -94,6 +107,8 @@ int main(int argc, char **argv)
 
    FILE *m_stream = open(m_file_path, "r");
    char *m_source = read(m_stream);
+   char *temp_source = malloc(strlen(m_source));
+   strcpy(temp_source, m_source);
 
    fit(m_source);
 
@@ -101,14 +116,23 @@ int main(int argc, char **argv)
    for (int i = 0; i < length(m_source); i++)
       m_lexemes[i] = calloc(0x100, sizeof(char));
 
+
+   /* kelimelestirilmis halini gormek icin commentlari kaldiriniz.
+   for (int i = 0; i < size; i++) 
+      printf("%s, ", lexeme[i]);
+   */
+
    int size;
-   size=lexeme(m_source, m_lexemes);
-   parse(size, m_lexemes);
+   parse(size=lexeme(m_source, m_lexemes), m_lexemes);
+
+   printf("%s", temp_source);
+   printf("\nParsing Successfull!");
 
    for (int i = 0; i < size; i++)
       free(m_lexemes[i]);
    free(m_lexemes);
 
+   free(temp_source);
    free(m_source);
    close(m_stream);
 }

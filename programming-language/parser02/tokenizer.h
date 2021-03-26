@@ -103,6 +103,8 @@ TOKEN get_token_type(char char_)
                return GREATER;
             case '=':
                return EQUAL;
+            case '!':
+               return BANG;
             case '.':
                return DOT;
             case '%':
@@ -170,6 +172,8 @@ TOKEN get_final_token_type(char *lexeme_)
       return GREATER;
    if (strcmp(lexeme_, "=") == 0)
       return EQUAL;
+   if (strcmp(lexeme_, "!") == 0)
+      return BANG;
    if (strcmp(lexeme_, ".") == 0)
       return DOT;
    if (strcmp(lexeme_, "%") == 0)
@@ -304,6 +308,7 @@ int lexeme(char *string_, char **lexemes_)
          case LESS:
          case GREATER:
          case EQUAL:
+         case BANG:
          case DOT:
          case PERCENT:
          case LBRACE:
@@ -324,6 +329,7 @@ int lexeme(char *string_, char **lexemes_)
                case EQUAL:
                case LESS:
                case GREATER:
+               case BANG:
                   switch (m_token_type)
                   {
                      case EQUAL:

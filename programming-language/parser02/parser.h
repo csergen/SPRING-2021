@@ -52,7 +52,7 @@ void next_token()
 
 void ifstmt()
 {
-  if (strcmp(s_current_lexeme, "if") == 0)
+  if (s_current_token == IF)
   {
     next_token();
     if (s_current_token == LPAR) {
@@ -63,6 +63,29 @@ void ifstmt()
         error("expected ')'");
       next_token();
       scope();
+    }
+  }
+
+  if (s_current_token == ELSEIF) {
+    next_token();
+    if (s_current_token == LPAR) {
+      next_token();
+      expression();
+
+      if (s_current_token != RPAR)
+        error("expected ')'");
+      next_token();
+      scope();
+      ifstmt();
+    }
+  }
+
+  if (s_current_token == ELSE) {
+    next_token();
+    scope();
+
+    if (s_current_token == ELSE) {
+      error("unexpected definition");
     }
   }
 }
@@ -118,7 +141,7 @@ void factor()
 
 void negation()
 {
-  if (s_current_token == BANG)
+  if (s_current_token == BANG) 
     next_token();
   factor();
 }

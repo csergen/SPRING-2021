@@ -1,0 +1,5 @@
+.vscode
+.gdb_history
+*.out
+*.o
+*.exe

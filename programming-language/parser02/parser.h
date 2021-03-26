@@ -427,6 +427,8 @@ void parse(int size, char **lexemes)
 
   next_token();
   program();
+
+  free(s_current_lexeme);
 }
 
 #endif

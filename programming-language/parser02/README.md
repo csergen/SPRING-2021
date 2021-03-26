@@ -17,4 +17,4 @@
 ```
 
 ### State Machine Diagram:
-[smd](res/sm.png)
+![smd](res/sm.png)

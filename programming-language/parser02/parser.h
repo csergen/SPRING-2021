@@ -355,6 +355,8 @@ void sentences()
       if (s_current_token != SEMI)
         error("expected ';'");
       next_token();
+      if (s_current_token == SEMI)
+        error("unexpected definition");
       break;
     case IF:
       ifstmt();

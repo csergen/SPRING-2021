@@ -55,7 +55,7 @@
 <conj>: <relation> { && <relation> }
 
 {* <addition> < <addition> <= <addition> > <addition> >= <addition> == <addition> != <addition>  .... *}
-<relation>: <addition> { ( < | <= | > | >= | == | != ) <addition>}
+<relation>: <addition> { ( < | <= | > | >= | == | != ) <addition> }
 
 {* <term> + <term> - <term> ..... *}
 <addition>: <term> { (+ | -) <term> }
@@ -75,4 +75,8 @@
 <forstmt>: for ([<assign>]; [<expression>]; [<assign>]) <scope>
 
 <whilestmt>: while ( [<expression>] ) <scope>
+
+<stringstmt>: " { <factor> }"
+
+<iostmt>: printf | scanf ([<stringstmt> {, <id> }]);
 ```

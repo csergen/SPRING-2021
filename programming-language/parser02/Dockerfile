@@ -5,4 +5,4 @@ WORKDIR ./usr/src/parser
 
 RUN gcc -o parser -I*.h parser.c
 
-CMD ["./parser", "test/general.test"]
+CMD ["./parser", "test/mainfun.test"]

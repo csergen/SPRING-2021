@@ -1,16 +1,15 @@
 int main()
 {
-  int a = 10;
-  float b = 10;
-  double d = a * b;
-  char c = 'c';
-  char s = "string";
-
+  int _variable_01 = 10;
+  float _variable_01_02 = 10;
+  double __variable_000_0variable = a * b;
+  char variable_002 = 'c';
+  char _001_var_002__variable = "string";
 
   b += a;
-  b -= a + b * d;
+  b -= a + b* d;
   d *= a / b + d + c / 2 - 10 + b || c;
-  a /= 1001 + 10/2-100*10 && 10 /2;
+  a /= 1001 + 10/2-100*10 && 10/ 2;
 
   if (a == 10) {
     if (a <= 10) {
@@ -60,7 +59,7 @@ int main()
         {
           for (int i = 0; i < 10; i--) {
             for (int j += i; i && j == 10; i++) {
-              int a = 10;
+              int a = 100;
             }
           }
         }

@@ -1,16 +1,210 @@
 main()
 {
-  int a = 10;
-  if (a < 10) {
-    int b = 10;
-    if (b > a) {
-      int c = a + b;
-      if (c <= a + b + c) {
-        int d = a + b + c / a*b*c / a-b-c;
-        if (d && a+b+c || d && d*10) {
-          int abcde = a+b+c+d;
+  if (a == b)
+  {
+
+  }
+
+  if (a == b)
+  {
+
+  }
+
+  if (a >= b)
+  {
+
+  }
+
+  if (a != b)
+  {
+
+  }
+
+  if (a < b)
+  {
+
+  }
+
+  if (a > b)
+  {
+
+  }
+
+  if (a && b)
+  {
+
+  }
+
+  if (a || b)
+  {
+    
+  }
+
+  if (a == b)
+  {
+    if (a <= b) 
+    {
+      if (a >= b) 
+      {
+        if (a != b) 
+        {
+          if (a < b)
+          {
+            if (a > b)
+            {
+              if (a && b)
+              {
+                if (a || b)
+                {
+                }
+              }
+            }
+          }
         }
       }
+    }
+  }
+
+  if (a == b)
+  {
+
+  } else
+  {
+
+  }
+
+  if (a == b)
+  {
+
+  } elseif (a < b)
+  {
+
+  } 
+
+  if (a == b)
+  {
+
+  } elseif (a < b)
+  {
+
+  } elseif (a > b)
+  {
+
+  }
+
+  if (a == b)
+  {
+
+  } elseif (a < b)
+  {
+
+  } else {
+
+  } 
+
+  if (a == b)
+  {
+
+  } elseif (a < b)
+  {
+
+  } elseif (a > b)
+  {
+
+  } elseif (a >= b)
+  {
+
+  } elseif (a <= b)
+  {
+
+  } elseif (a != b)
+  {
+
+  } elseif (a&&b)
+  {
+
+  } elseif(a||b)
+  {
+
+  } else {
+
+  }
+
+  if (a == b)
+  {
+    if (a == b)
+    {
+
+    } else {
+
+    }
+  } elseif (a < b)
+  {
+    if (a < b)
+    {
+
+    } else {
+
+    }
+  } elseif (a > b)
+  {
+    if (a > b)
+    {
+
+    } else {
+
+    }
+  } elseif (a >= b)
+  {
+    if (a >= b)
+    {
+
+    } else {
+	
+      
+    }
+  } elseif (a <= b)
+  {
+    if (a <= b)
+    {
+
+    } else {
+
+    }
+  } elseif (a != b)
+  {
+    if (a != b)
+    {
+
+    } else {
+
+    }
+  } elseif (a&&b)
+  {
+
+    if (a&&b)
+    {
+
+    } else {
+
+    }
+  } elseif(a||b)
+  {
+    if (a||b)
+    {
+
+    } else {
+
+    }
+  } else {
+    if (a < b || a > b || a && b || a <= b || a >= b && a != b || a == b && a <= b)
+    {
+
+    } elseif (a < b || a > b || a && b || a <= b || a >= b && a != b || a == b && a <= b)
+    {
+
+    } else {
+
     }
   }
 }

@@ -1,7 +1,8 @@
-res/
 Dockerfile
 .gdb_history
 .git
 .vscode
 .gitignore
 README.md
+*.gif
+*.png

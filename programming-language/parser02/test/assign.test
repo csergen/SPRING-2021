@@ -1,5 +1,11 @@
 main()
 {
+  int;
+  float;
+  double;
+  char;
+  void;
+  
   int int_variable_001;
   float float_variable_002;
   double double_variable_003;
@@ -18,5 +24,11 @@ main()
   char_variable_004 = 100 + 100 * 100 - 100 / 500 && 100 || 100;
   void_variable_005 = 100 + 100 * 100 - 100 / 500 && 100 || 100;
 
-  int a = 'c';
+  int_variable_001 += 10;
+  float_variable_002 -= 10;
+  double_variable_003 *= 10;
+  char_variable_004 /= 10;
+
+  int char_a = 'c';
+  int string_c = "hello";
 }

@@ -1,0 +1,18 @@
+void main()
+{
+  int a = 10;
+  printf("Hello world");
+  printf("%d %f %s %c");
+  printf("decimal %d flt %f string %s chr %c");
+  printf("decimal %d flt %f string %s chr %c", a, b, c, d);
+
+  scanf("%d");
+  scanf("%f");
+  scanf("%s");
+  scanf("%c");
+  
+  scanf("%d", a);
+  scanf("%f", a);
+  scanf("%s", a);
+  scanf("%c", a);
+}

@@ -13,11 +13,16 @@
   $ sudo systemctl start docker
   $ sudo docker build -t parser-img .
   $ sudo docker run -it --rm --name parser parser-img
-  $ sudo systemctl stop docker.socket
+  $ sudo systemctl stop docker.socketa
+
+  or
+
+  $ gcc -o parser -I*.h parser.c
+  $ ./parser or ./parser <FILE_PATH>
 ```
 
 ### State Machine Diagram:
-![smd](res/sm.png)
+![smd](sm.png)
 
 ### Grammar:
 ```html

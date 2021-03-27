@@ -10,7 +10,7 @@ PARSERIN TANIMADIGI IFADELER:
    elseif ) yapilirsa program '(' parantezin olmamasindan dolayi hata verir ve dogru bir cikti uretmis olur.
 )
 
-0) fonksiyon tanimi, return ifadeleri, pointer, adres gibi ifadeleri taniyamiyor.
+0) fonksiyon tanimi, return ifadeleri, pointer, adress gibi ifadeleri taniyamiyor.
    bkz: a(), return 0;, char *string;, &varaddr gibi
 
 1) noktali sayilari taniyamiyor
@@ -31,16 +31,17 @@ PARSERIN TANIMADIGI IFADELER:
    bkz: if (a > 10)
          a = 0; hatali cikti uretir { } olmak zorundadir.
 
-5) elseif  bitisik yazilmaz ise hata verir.(bkz: else if hata uretecektir)
+5) elseif  bitisik yazilmaz ise elseif i tanimaz. 
+   bkz: else if (a < 10) hata uretecektir
 
-6) if (burada atama islemi yapilirsa hata verir)
-   if (a = 10 gibi)
+6) if ( ' burada atama islemi yapilirsa hata verir' )
+   if (a = 10) gibi
 
 7) for (<assign>; (burada atama islemi yapilirsa hata verir); <assign>)
-   for (int i = 0; i++ gibi veya i = 10 gibi; i++)
+   for (int i = 0; ' i++ gibi veya i = 10 gibi' ; i++)
 
 8) while (burada atama islemi yapilirsa hata verir)
-   while (a++ gibi veya a=10 gibi. sadece logic ifadeleri taniyabiliyor)
+   while (a++ gibi veya a=10 gibi) sadece logic ifadeleri taniyabiliyor
 
 9) 0 ile baslayan sayilarda hata uretmiyor:
    bkz: 0100 gibi
@@ -51,7 +52,20 @@ PARSERIN TANIMADIGI IFADELER:
 
 12) Kaynak dosyasinin ici bos olursa hata verecektir. (Segm. fau.)
 
-NOT: gcc ile linux uzerinde compile edilirse sorunsuz(60-50%) calisacaktir. (windows'ta (MINGW) calismiyor karakter hatasi veriyor.)
+13) ':' karakterini tanimiyor.
+
+14) printf/scanf icinde %d %s %c %f gibi ifadelerin disinda %e, %f, %x, ... gibi ifadeleri
+   tanimiyor.
+   bkz: printf("%t") gibi
+
+15) string icinde !, <=, if, ,, for, *, + gibi ifadeleri tanimiyor.
+      sadece identifier veya number veya format ifadeleri olmak zorunda.
+      "hello world 00123123" calisir ancak 
+      "hello world!" calismaz.
+      "hello world: " calismaz.
+      "hello world = 10 " calismaz. vb.
+
+NOT: gcc ile linux uzerinde compile edilirse (70-60%) dogru calisacaktir. (windows'ta (MINGW) calismiyor, karakterler dogru calismiyor.)
 NOT: Programin hatasiz cikti verebilmesi icin DOCKER kullanilabilir.
    ! Dockerfile icindeki  CMD ["./parser", "KAYNAKDOSYASI"] KAYNAKDOSYASI yerine test edilecek test dosyasinin yolu
    verilebilir. (AYNI DIZINDE veya AYNI DIZIN ICINDEKI DOSYALARIN ALTINDA OLMAK SARTIYLA)
@@ -75,6 +89,10 @@ NOT: Programin hatasiz cikti verebilmesi icin DOCKER kullanilabilir.
       #error "OS was not recognized. (ABORTED)"
    #endif
 #endif
+
+#define RED   "\x1B[31m"
+#define GRN   "\x1B[32m"
+#define RESET "\x1B[0m"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -100,7 +118,7 @@ int main(int argc, char **argv)
       if (strlen(m_file_path) <= 0)
       {
          free(m_file_path);
-         printf("File path does not exist!\n");
+         printf(RED"File does not exist!\n"RESET);
          exit(true);
       }
    }
@@ -114,18 +132,21 @@ int main(int argc, char **argv)
 
    char **m_lexemes = malloc(sizeof(char*) * length(m_source));
    for (int i = 0; i < length(m_source); i++)
-      m_lexemes[i] = calloc(0x100, sizeof(char));
+      m_lexemes[i] = calloc(0x200, sizeof(char));
 
-
-   printf("%s", temp_source);
+   printf("\n\n%s\n", temp_source);
 
    int size;
-   parse(size=lexeme(m_source, m_lexemes), m_lexemes);
-   printf("\nParsing Successfull!");
+   size = lexeme(m_source, m_lexemes);
 
-   for (int i = 0; i < size; i++) 
-      printf("%s, ", m_lexemes[i]);
+   printf(GRN"\n\nout: Lexeme process is succesful!\n\n"RESET);
+   for (int i = 0; i < size; i++)  {
+      printf(" %s ", m_lexemes[i]);
+   }
 
+   parse(size, m_lexemes);
+
+   printf(GRN"\n\n\nout: Parsing process is successful! Error was not found!\n\n" RESET);
 
 
    for (int i = 0; i < size; i++)

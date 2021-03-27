@@ -48,6 +48,10 @@
 <forstmt>: for ([<assign>]; [<expression>]; [<assign>]) <scope>
 
 <whilestmt>: while ( [<expression>] ) <scope>
+
+<stringstmt>: " { <factor> }"
+
+<iostmt>: printf | scanf ([<stringstmt> {, <id> }]);
 */
 
 #ifndef __PARSER_H__
@@ -63,49 +67,102 @@ static char **s_current_lexemes;
 static int s_size;
 // GLOBAL PROPERTIES in Parser
 
-void sentences();
-void scope();
-void program();
-void sentence();
-void assign();
-void ifstmt();
-void forstmt();
-void whilestmt();
-void expression();
-void conjuction();
-void relation();
-void addition();
-void term();
-void negation();
-void factor();
-bool ttype();
+static void sentences();
+static void scope();
+static void program();
+static void sentence();
+static void assign();
+static void ifstmt();
+static void forstmt();
+static void stringstmt();
+static void iostmt();
+static void whilestmt();
+static void expression();
+static void conjuction();
+static void relation();
+static void addition();
+static void term();
+static void negation();
+static void factor();
+static bool ttype();
+static void parse();
+
 
 void error(char *s)
 {
-  printf("error: %s ....%s\n%s\n^\n", s, s_current_lexeme, s_current_lexeme);
+  printf(RED"\n\nerror: %s ~~~%s\n%s\n^\n\n" RESET, s, s_current_lexeme, s_current_lexeme);
   exit(true);
 }
 
-void next_token()
+static void 
+next_token()
 {
   if (s_current_iter < s_size)
   {
     s_current_lexeme = s_current_lexemes[s_current_iter];
-    s_current_token = get_final_token_type(s_current_lexeme);
+    if (length(s_current_lexeme) == 1) {
+      s_current_token = get_token_type(*s_current_lexeme);
+    } else
+      s_current_token = get_string_token_type(s_current_lexeme);
     s_current_iter++;
   }
   else
   {
     s_current_token = NIL;
-    memset(s_current_lexeme, 0, sizeof(s_current_lexeme) + 1);
     s_current_lexeme = NULL;
+  }
+}
+
+/* 
+  <stringstmt>: " { <factor> | <format> }"
+*/
+static void
+stringstmt()
+{
+  if (s_current_token == DQUOTE)
+  {
+    next_token();
+    while (s_current_token != DQUOTE) {
+      if (s_current_token == DQUOTE)
+        break;
+      factor();
+    }
+    next_token();
+  }
+}
+
+
+/* 
+  <iostmt>: printf (<stringstmt> {, <id> });
+*/
+static void
+iostmt()
+{
+  if (s_current_token == PRINTF || s_current_token == SCANF) 
+  {
+    next_token();
+    if (s_current_token == LPAR)
+    {
+      next_token();
+      stringstmt();
+
+      while (s_current_token == COMMA) {
+        next_token();
+        factor();
+      }
+
+      if (s_current_token != RPAR)
+        error("expected ')'");
+      next_token();
+    }
   }
 }
 
 /* <ifstmt>: if ({ <expression> }) <scope>
           { elseif ( { <expression> } ) <scope> }
           [ else <scope> ] */
-void ifstmt()
+static void 
+ifstmt()
 {
   if (s_current_token == IF)
   {
@@ -149,8 +206,10 @@ void ifstmt()
 }
 
 /* <forstmt>: for ([<assign>]; [<expression>]; [<assign>]) <scope> */
-void forstmt()
-{
+static void 
+forstmt()
+{     assign();
+
   if (s_current_token == FOR)
   {
     next_token();
@@ -184,7 +243,8 @@ void forstmt()
 }
 
 /* <whilestmt>: while ( [<expression>] ) <scope> */
-void whilestmt()
+static void
+whilestmt()
 {
   if (s_current_token == WHILE) {
     next_token();
@@ -204,7 +264,8 @@ void whilestmt()
 }
 
 /* <type>: int | float | double | char | void */
-bool ttype()
+static bool
+ttype()
 {
   switch (s_current_token)
   {
@@ -220,9 +281,10 @@ bool ttype()
 }
 
 /* <factor>: <id> | <number> | <quote> | <dquote> */
-void factor()
+static void
+factor()
 {
-  if (s_current_token == IDENTIFIER || s_current_token == NUMBER)
+  if (s_current_token == IDENTIFIER || s_current_token == NUMBER) 
     next_token();
   else if (s_current_token == QUOTE)
   {
@@ -241,6 +303,8 @@ void factor()
     if (s_current_token != DQUOTE)
       error("missing terminating \" character");
     next_token();
+  } else if (s_current_token == FORMATINT || s_current_token == FORMATCHAR || s_current_token == FORMATFLOAT || s_current_token == FORMATSTRING) {
+      next_token();
   }
   else
     error("invalid factor");
@@ -248,7 +312,8 @@ void factor()
 
 /* {* !a | !0 *}
    <negation>: ! <factor> */
-void negation()
+static void 
+negation()
 {
   if (s_current_token == BANG)
     next_token();
@@ -259,7 +324,8 @@ void negation()
 
 /* {* <negation> * <negation> / <negation> .... *}
    <term>: <negation> { (* | /) <negation> } */
-void term()
+static void
+term()
 {
   negation();
 
@@ -272,7 +338,8 @@ void term()
 
 /* {* <term> + <term> - <term> ..... *}
    <addition>: <term> { (+ | -) <term> } */
-void addition()
+static void 
+addition()
 {
   term();
 
@@ -285,7 +352,8 @@ void addition()
 
 /* {* <addition> < <addition> <= <addition> > <addition> >= <addition> == <addition> != <addition>  .... *}
    <relation>: <addition> { ( < | <= | > | >= | == | != ) <addition> } */
-void relation()
+static void 
+relation()
 {
   addition();
 
@@ -300,7 +368,8 @@ void relation()
 
 /* {* <relation> && <relation> && <relation> && ... *}
    <conj>: <relation> { && <relation> } */
-void conjuction()
+static void 
+conjuction()
 {
   relation();
 
@@ -314,7 +383,8 @@ void conjuction()
 /* 
   {* <conj> || <conj> || <conj> || ... *}
   <expression>: <conj> { || <conj> } */
-void expression()
+static void 
+expression()
 {
   conjuction();
 
@@ -326,7 +396,8 @@ void expression()
 }
 
 /* <assign>: [<type>] <id> ( = | += | -= | *= | /= ) <expression> */
-void assign()
+static void 
+assign()
 {
   if (ttype())
     next_token();
@@ -364,7 +435,8 @@ void assign()
   <forstmt>     |
   <whilestmt>   |
 */
-void sentences()
+static void 
+sentences()
 {
   while (s_current_token != RBRACE && s_current_token != NIL)
   {
@@ -388,9 +460,15 @@ void sentences()
       if (s_current_token == SEMI)
         error("unexpected definition");
       break;
+    case NUMBER:
+      error("unexpected definition");
+      break;
     case IF:
       ifstmt();
       break;
+    case ELSEIF:
+    case ELSE:
+      error("unexpected definition");
     case FOR:
       forstmt();
       break;
@@ -398,15 +476,19 @@ void sentences()
       whilestmt();
       break;
     case PRINTF:
-      break;
     case SCANF:
+      iostmt();
+      if (s_current_token != SEMI)
+        error("expected ';'");
+        next_token();
       break;
     }
   }
 }
 
 /* <scope>: '{' <sentences> '}' */
-void scope()
+static void 
+scope()
 {
   if (s_current_token == LBRACE)
   {
@@ -421,7 +503,8 @@ void scope()
 }
 
 /* <program>: [int | void] main () <scope> */
-void program()
+static void 
+program()
 {
   if (s_current_token == INT || s_current_token == VOID)
     next_token();
@@ -453,7 +536,8 @@ void program()
     error("undefined reference to 'main'");
 }
 
-void parse(int size, char **lexemes)
+static void 
+parse(int size, char **lexemes)
 {
   s_current_lexemes = lexemes;
   s_current_iter = 0;

@@ -137,55 +137,8 @@ void s_addchar(char *lexeme_, char *m_current_char)
    append(lexeme_, *m_current_char);
 }
 
-TOKEN get_final_token_type(char *lexeme_)
+TOKEN get_string_token_type(char *lexeme_)
 {
-
-   if (strcmp(lexeme_, "(") == 0)
-      return LPAR;
-   if (strcmp(lexeme_, ")") == 0)
-      return RPAR;
-   if (strcmp(lexeme_, "{") == 0)
-      return LBRACE;
-   if (strcmp(lexeme_, "}") == 0)
-      return RBRACE;
-   if (strcmp(lexeme_, "[") == 0)
-      return LSQB;
-   if (strcmp(lexeme_, "]") == 0)
-      return RSQB;
-   if (strcmp(lexeme_, "+") == 0)
-      return PLUS;
-   if (strcmp(lexeme_, "-") == 0)
-      return MINUS;
-   if (strcmp(lexeme_, "*") == 0)
-      return STAR;
-   if (strcmp(lexeme_, "/") == 0)
-      return SLASH;
-   if (strcmp(lexeme_, ";") == 0)
-      return SEMI;
-   if (strcmp(lexeme_, ",") == 0)
-      return COMMA;
-   if (strcmp(lexeme_, "\\") == 0)
-      return BSLASH;
-   if (strcmp(lexeme_, "&") == 0)
-      return AMPER;
-   if (strcmp(lexeme_, "<") == 0)
-      return LESS;
-   if (strcmp(lexeme_, ">") == 0)
-      return GREATER;
-   if (strcmp(lexeme_, "=") == 0)
-      return EQUAL;
-   if (strcmp(lexeme_, "!") == 0)
-      return BANG;
-   if (strcmp(lexeme_, ".") == 0)
-      return DOT;
-   if (strcmp(lexeme_, "%") == 0)
-      return PERCENT;
-   if (strcmp(lexeme_, "|") == 0)
-      return PIPE;
-   if (strcmp(lexeme_, "'") == 0)
-      return QUOTE;
-   if (strcmp(lexeme_, "\"") == 0)
-      return DQUOTE;
    if (strcmp(lexeme_, ">=") == 0)
       return LESSEQUAL;
    if (strcmp(lexeme_, "<=") == 0)

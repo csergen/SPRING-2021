@@ -119,7 +119,7 @@ int main(int argc, char **argv)
 
    /* kelimelestirilmis halini gormek icin commentlari kaldiriniz.
    for (int i = 0; i < size; i++) 
-      printf("%s, ", lexeme[i]);
+      printf("%s, ", m_lexemes[i]);
    */
 
    int size;

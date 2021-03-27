@@ -5,62 +5,62 @@
 
 typedef enum _token_name
 {
-   NUMBER,           // 0
-   IDENTIFIER,       // 1
-   LPAR,             // 2
-   RPAR,             // 3
-   LSQB,             // 4
-   RSQB,             // 5
-   LBRACE,           // 6
-   RBRACE,           // 7
-   DOT,              // 8
-   COMMA,            // 9
-   SEMI,             // 10
-   PLUS,             // 11
-   MINUS,            // 12
-   STAR,             // 13
-   SLASH,            // 14
-   PERCENT,          // 15
-   BSLASH,           // 16
-   AMPER,            // 17
-   PIPE,             // 18
-   LESS,             // 19
-   GREATER,          // 20
-   EQUAL,            // 21
-   GREATEREQUAL,     // 22
-   LESSEQUAL,        // 23
-   NOTEQUAL,         // 24
-   EQEQUAL,          // 25
-   AND,              // 26
-   OR,               // 27
-   QUOTE,            // 28
-   DQUOTE,           // 29
-   PLUSEQUAL,        // 30
-   MINUSEQUAL,       // 31
-   STAREQUAL,        // 32
-   SLASHEQUAL,       // 33
-   PERCENTEQUAL,     // 34
-   INT,              // 35
-   FLOAT,            // 36
-   DOUBLE,           // 37
-   CHAR,             // 38
-   VOID,             // 39
-   IF,               // 40
-   ELSEIF,           // 41
-   ELSE,             // 42
-   FOR,              // 43
-   WHILE,            // 44
-   PRINTF,           // 45
-   SCANF,            // 46
-   FORMATINT,        // 47
-   FORMATCHAR,       // 48
-   FORMATSTRING,     // 49
-   FORMATFLOAT,      // 50
-   NEWLINE,          // 51
-   BANG,             // 52
-   INCREASE,         // 53
-   DECREASE,         // 54
-   NIL               // 53
+   NUMBER,       // 0
+   IDENTIFIER,   // 1
+   LPAR,         // 2
+   RPAR,         // 3
+   LSQB,         // 4
+   RSQB,         // 5
+   LBRACE,       // 6
+   RBRACE,       // 7
+   DOT,          // 8
+   COMMA,        // 9
+   SEMI,         // 10
+   PLUS,         // 11
+   MINUS,        // 12
+   STAR,         // 13
+   SLASH,        // 14
+   PERCENT,      // 15
+   BSLASH,       // 16
+   AMPER,        // 17
+   PIPE,         // 18
+   LESS,         // 19
+   GREATER,      // 20
+   EQUAL,        // 21
+   GREATEREQUAL, // 22
+   LESSEQUAL,    // 23
+   NOTEQUAL,     // 24
+   EQEQUAL,      // 25
+   AND,          // 26
+   OR,           // 27
+   QUOTE,        // 28
+   DQUOTE,       // 29
+   PLUSEQUAL,    // 30
+   MINUSEQUAL,   // 31
+   STAREQUAL,    // 32
+   SLASHEQUAL,   // 33
+   PERCENTEQUAL, // 34
+   INT,          // 35
+   FLOAT,        // 36
+   DOUBLE,       // 37
+   CHAR,         // 38
+   VOID,         // 39
+   IF,           // 40
+   ELSEIF,       // 41
+   ELSE,         // 42
+   FOR,          // 43
+   WHILE,        // 44
+   PRINTF,       // 45
+   SCANF,        // 46
+   FORMATINT,    // 47
+   FORMATCHAR,   // 48
+   FORMATSTRING, // 49
+   FORMATFLOAT,  // 50
+   NEWLINE,      // 51
+   BANG,         // 52
+   INCREASE,     // 53
+   DECREASE,     // 54
+   NIL           // 53
 } TOKEN;
 
 TOKEN get_token_type(char char_)
@@ -68,60 +68,60 @@ TOKEN get_token_type(char char_)
    CHR_TYPE m_char_type = type(char_);
    switch (m_char_type)
    {
-      case DIGIT:
-         return NUMBER;
-      case LETTER:
-         return IDENTIFIER;
-      case OTHER:
-         switch (char_)
-         {
-            case '(':
-               return LPAR;
-            case ')':
-               return RPAR;
-            case '[':
-               return LSQB;
-            case ']':
-               return RSQB;
-            case ',':
-               return COMMA;
-            case ';':
-               return SEMI;
-            case '+':
-               return PLUS;
-            case '-':
-               return MINUS;
-            case '*':
-               return STAR;
-            case '/':
-               return SLASH;
-            case '\\':
-               return BSLASH;
-            case '&':
-               return AMPER;
-            case '<':
-               return LESS;
-            case '>':
-               return GREATER;
-            case '=':
-               return EQUAL;
-            case '!':
-               return BANG;
-            case '.':
-               return DOT;
-            case '%':
-               return PERCENT;
-            case '{':
-               return LBRACE;
-            case '}':
-               return RBRACE;
-            case '|':
-               return PIPE;
-            case '\'':
-               return QUOTE;
-            case '"':
-               return DQUOTE;
-         }
+   case DIGIT:
+      return NUMBER;
+   case LETTER:
+      return IDENTIFIER;
+   case OTHER:
+      switch (char_)
+      {
+      case '(':
+         return LPAR;
+      case ')':
+         return RPAR;
+      case '[':
+         return LSQB;
+      case ']':
+         return RSQB;
+      case ',':
+         return COMMA;
+      case ';':
+         return SEMI;
+      case '+':
+         return PLUS;
+      case '-':
+         return MINUS;
+      case '*':
+         return STAR;
+      case '/':
+         return SLASH;
+      case '\\':
+         return BSLASH;
+      case '&':
+         return AMPER;
+      case '<':
+         return LESS;
+      case '>':
+         return GREATER;
+      case '=':
+         return EQUAL;
+      case '!':
+         return BANG;
+      case '.':
+         return DOT;
+      case '%':
+         return PERCENT;
+      case '{':
+         return LBRACE;
+      case '}':
+         return RBRACE;
+      case '|':
+         return PIPE;
+      case '\'':
+         return QUOTE;
+      case '"':
+         return DQUOTE;
+      }
    }
    return NIL;
 }
@@ -248,7 +248,8 @@ TOKEN get_final_token_type(char *lexeme_)
       return NEWLINE;
 
    int type_counter = 0;
-   for (int i = 0; i < length(lexeme_); i++) {
+   for (int i = 0; i < length(lexeme_); i++)
+   {
       if (isdigit(lexeme_[i]))
          type_counter++;
    }
@@ -260,12 +261,11 @@ TOKEN get_final_token_type(char *lexeme_)
       return IDENTIFIER;
 
    return NIL;
-
 }
 
 int lexeme(char *string_, char **lexemes_)
 {
-   char *m_lexeme = (char*)malloc(0x100 * sizeof(char));
+   char *m_lexeme = (char *)malloc(0x100 * sizeof(char));
    char m_current_char;
 
    TOKEN m_token_type;
@@ -279,127 +279,130 @@ int lexeme(char *string_, char **lexemes_)
    {
       switch (m_token_type)
       {
-         case IDENTIFIER:
+      case IDENTIFIER:
+         s_addchar(m_lexeme, &m_current_char);
+         s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
+
+         while (m_token_type == IDENTIFIER || m_token_type == NUMBER)
+         {
             s_addchar(m_lexeme, &m_current_char);
             s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
+         }
+         break;
+      case NUMBER:
+         s_addchar(m_lexeme, &m_current_char);
+         s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
 
-            while (m_token_type == IDENTIFIER || m_token_type == NUMBER)
-            {
-               s_addchar(m_lexeme, &m_current_char);
-               s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
-            }
-            break;
-         case NUMBER:
+         while (m_token_type == NUMBER)
+         {
             s_addchar(m_lexeme, &m_current_char);
             s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
+         }
+         break;
+      case LPAR:
+      case RPAR:
+      case LSQB:
+      case RSQB:
+      case COMMA:
+      case SEMI:
+      case PLUS:
+      case MINUS:
+      case STAR:
+      case SLASH:
+      case BSLASH:
+      case AMPER:
+      case LESS:
+      case GREATER:
+      case EQUAL:
+      case BANG:
+      case DOT:
+      case PERCENT:
+      case LBRACE:
+      case RBRACE:
+      case PIPE:
+      case QUOTE:
+      case DQUOTE:
+         s_addchar(m_lexeme, &m_current_char);
+         TOKEN temp_type = m_token_type;
+         s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
 
-            while (m_token_type == NUMBER)
-            {
-               s_addchar(m_lexeme, &m_current_char);
-               s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
-            }
-            break;
-         case LPAR:
-         case RPAR:
-         case LSQB:
-         case RSQB:
-         case COMMA:
-         case SEMI:
+         switch (temp_type)
+         {
          case PLUS:
          case MINUS:
          case STAR:
          case SLASH:
-         case BSLASH:
-         case AMPER:
+         case EQUAL:
          case LESS:
          case GREATER:
-         case EQUAL:
          case BANG:
-         case DOT:
-         case PERCENT:
-         case LBRACE:
-         case RBRACE:
-         case PIPE:
-         case QUOTE:
-         case DQUOTE:
-            s_addchar(m_lexeme, &m_current_char);
-            TOKEN temp_type = m_token_type;
-            s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
-
-            switch (temp_type)
+            switch (m_token_type)
             {
-               case PLUS:
-               case MINUS:
-               case STAR:
-               case SLASH:
-               case EQUAL:
-               case LESS:
-               case GREATER:
-               case BANG:
-                  switch (m_token_type)
-                  {
-                     case EQUAL:
-                        s_addchar(m_lexeme, &m_current_char);
-                        s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
-                        break;
-                     case PLUS:
-                        if (temp_type == PLUS) {
-                           s_addchar(m_lexeme, &m_current_char);
-                           s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
-                        }
-                        break;
-                     case MINUS:
-                        if (temp_type == MINUS) {
-                           s_addchar(m_lexeme, &m_current_char);
-                           s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
-                        }
-                        break;
-                  }
-                  break;
-               case PERCENT:
-                  switch (m_current_char)
-                  {
-                     case 'd':
-                     case 'f':
-                     case 'c':
-                     case 's':
-                        s_addchar(m_lexeme, &m_current_char);
-                        s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
-                  }
-                  break;
-               case BSLASH:
-                  switch (m_current_char)
-                  {
-                     case 'n':
-                     case 't':
-                     case 'r':
-                        s_addchar(m_lexeme, &m_current_char);
-                        s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
-                  }
-                  break;
-               case AMPER:
-                  switch (m_token_type)
-                  {
-                     case AMPER:
-                        s_addchar(m_lexeme, &m_current_char);
-                        s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
-                  }
-                  break;
-                  break;
-               case PIPE:
-                  switch (m_token_type)
-                  {
-                     case PIPE:
-                        s_addchar(m_lexeme, &m_current_char);
-                        s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
-                  }
-                  break;
+            case EQUAL:
+               s_addchar(m_lexeme, &m_current_char);
+               s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
+               break;
+            case PLUS:
+               if (temp_type == PLUS)
+               {
+                  s_addchar(m_lexeme, &m_current_char);
+                  s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
+               }
+               break;
+            case MINUS:
+               if (temp_type == MINUS)
+               {
+                  s_addchar(m_lexeme, &m_current_char);
+                  s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
+               }
+               break;
+            }
+            break;
+         case PERCENT:
+            switch (m_current_char)
+            {
+            case 'd':
+            case 'f':
+            case 'c':
+            case 's':
+               s_addchar(m_lexeme, &m_current_char);
+               s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
+            }
+            break;
+         case BSLASH:
+            switch (m_current_char)
+            {
+            case 'n':
+            case 't':
+            case 'r':
+               s_addchar(m_lexeme, &m_current_char);
+               s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
+            }
+            break;
+         case AMPER:
+            switch (m_token_type)
+            {
+            case AMPER:
+               s_addchar(m_lexeme, &m_current_char);
+               s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
             }
             break;
             break;
+         case PIPE:
+            switch (m_token_type)
+            {
+            case PIPE:
+               s_addchar(m_lexeme, &m_current_char);
+               s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
+            }
+            break;
+         }
+         break;
+         break;
       }
 
-      if (length(m_lexeme) > 0) {
+      if (length(m_lexeme) > 0)
+      {
          strcpy(lexemes_[lexeme_iter], m_lexeme);
          lexeme_iter++;
       }
@@ -408,7 +411,6 @@ int lexeme(char *string_, char **lexemes_)
 
       if (m_token_type == NIL)
          s_getchar(string_, &m_iterator, &m_current_char, &m_token_type);
-
    }
 
    free(m_lexeme);

@@ -122,10 +122,10 @@ int main(int argc, char **argv)
       printf("%s, ", m_lexemes[i]);
    */
 
+   printf("%s", temp_source);
+
    int size;
    parse(size=lexeme(m_source, m_lexemes), m_lexemes);
-
-   printf("%s", temp_source);
    printf("\nParsing Successfull!");
 
    for (int i = 0; i < size; i++)

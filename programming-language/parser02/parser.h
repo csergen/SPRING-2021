@@ -90,7 +90,7 @@ static void parse();
 
 void error(char *s)
 {
-  printf(RED"\n\nerror: %s ~~~%s\n%s\n^\n\n" RESET, s, s_current_lexeme, s_current_lexeme);
+  printf(RED"\n\nerror: 🤔 %s ~~~%s\n%s\n^\n\n" RESET, s, s_current_lexeme, s_current_lexeme);
   exit(true);
 }
 

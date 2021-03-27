@@ -139,14 +139,14 @@ int main(int argc, char **argv)
    int size;
    size = lexeme(m_source, m_lexemes);
 
-   printf(GRN"\n\nout: The Lexeme process is successful!\n\n"RESET);
+   printf(GRN"\n\nout: 🥳 The Lexeme process is successful!\n\n"RESET);
    for (int i = 0; i < size; i++)  {
       printf(" %s ", m_lexemes[i]);
    }
 
    parse(size, m_lexemes);
 
-   printf(GRN"\n\n\nout: The Parsing process is successful! An Error was not found!\n\n" RESET);
+   printf(GRN"\n\n\nout: 🥳 The Parsing process is successful! An Error was not found!\n\n" RESET);
 
    for (int i = 0; i < size; i++)
       free(m_lexemes[i]);

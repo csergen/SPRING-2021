@@ -117,16 +117,16 @@ int main(int argc, char **argv)
       m_lexemes[i] = calloc(0x100, sizeof(char));
 
 
-   /* kelimelestirilmis halini gormek icin commentlari kaldiriniz.
-   for (int i = 0; i < size; i++) 
-      printf("%s, ", m_lexemes[i]);
-   */
-
    printf("%s", temp_source);
 
    int size;
    parse(size=lexeme(m_source, m_lexemes), m_lexemes);
    printf("\nParsing Successfull!");
+
+   for (int i = 0; i < size; i++) 
+      printf("%s, ", m_lexemes[i]);
+
+
 
    for (int i = 0; i < size; i++)
       free(m_lexemes[i]);

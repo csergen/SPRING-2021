@@ -50,7 +50,7 @@
 <conj>: <relation> { && <relation> }
 
 {* <addition> < <addition> <= <addition> > <addition> >= <addition> == <addition> != <addition>  .... *}
-<relation>: <addition> { [ < | <= | > | >= | == | != ] addition}
+<relation>: <addition> { ( < | <= | > | >= | == | != ) <addition>}
 
 {* <term> + <term> - <term> ..... *}
 <addition>: <term> { (+ | -) <term> }

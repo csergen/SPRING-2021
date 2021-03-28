@@ -11,6 +11,8 @@ int main()
   d *= a / b + d + c / 2 - 10 + b || c;
   a /= 1001 + 10/2-100*10 && 10/ 2;
 
+  printf("%d", b);
+
   if (a == 10) {
     if (a <= 10) {
       if (a >= 10) {
@@ -19,17 +21,22 @@ int main()
             if (a+b == 10 && a-b != 10) {
               for (int i = 0; i <= a; i++) {
                 while (i % 100 <= 10) {
+                  printf("i %d", i);
                   i++;
                 }
                 i *= a + b + c + d / i;
               }
+               scanf("%d", a);
             }
+            printf("hello world");
           }
         }
+         printf("%d", 10);
       }
     }
   } else {
     if (a == 10) {
+      printf("%d", a);
       a = 0;
     } elseif (b < 10) {
       a = -1;
@@ -39,6 +46,7 @@ int main()
         if (a % 2 == 0) {
           a = 0;
         } else {
+          printf("%d", a);
           a = -1;
         }
       }

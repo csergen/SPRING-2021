@@ -90,7 +90,7 @@ static void parse();
 
 void error(char *s)
 {
-  printf(RED"\n\nerror: 🤔 %s ~~~%s\n%s\n^\n\n" RESET, s, s_current_lexeme, s_current_lexeme);
+  printf(RED"\n\nout: oops, something went wrong 🤔 %s ~~~%s\n%s\n^\n\n" RESET, s, s_current_lexeme, s_current_lexeme);
   exit(true);
 }
 
@@ -442,6 +442,9 @@ sentences()
   {
     switch (s_current_token)
     {
+    case SEMI:
+      next_token();
+      break;
     case LBRACE:
       scope();
       break;
@@ -461,7 +464,9 @@ sentences()
         error("unexpected definition");
       break;
     case NUMBER:
-      error("unexpected definition");
+      next_token();
+      if (s_current_token != SEMI)
+        error("expected ';'");
       break;
     case IF:
       ifstmt();

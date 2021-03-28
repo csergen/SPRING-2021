@@ -70,7 +70,6 @@ static int s_size;
 static void sentences();
 static void scope();
 static void program();
-static void sentence();
 static void assign();
 static void ifstmt();
 static void forstmt();
@@ -442,6 +441,10 @@ sentences()
   {
     switch (s_current_token)
     {
+    case LPAR:
+    case RPAR:
+      error("unexpected character");
+      break;
     case SEMI:
       next_token();
       break;
@@ -461,7 +464,7 @@ sentences()
         error("expected ';'");
       next_token();
       if (s_current_token == SEMI)
-        error("unexpected definition");
+        error("unexpected character");
       break;
     case NUMBER:
       next_token();
@@ -483,9 +486,9 @@ sentences()
     case PRINTF:
     case SCANF:
       iostmt();
-      if (s_current_token != SEMI)
+      if (s_current_token != SEMI) 
         error("expected ';'");
-        next_token();
+      next_token();
       break;
     }
   }

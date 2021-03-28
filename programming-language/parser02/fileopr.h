@@ -39,11 +39,11 @@ bool write(FILE *const stream_, const char *const text_)
 
 char *read(FILE *const stream_)
 {
-   char *m_destination = malloc(sizeof(char) * 1e6);
+   char *m_destination = malloc(sizeof(char)*0xF4240); // max 1 Mb
    char m_line;
    int m_line_counter = 0;
 
-   while ((m_line = fgetc(stream_)) != EOF)
+   while ((m_line = fgetc(stream_)) != EOF) 
       m_destination[m_line_counter++] = m_line;
 
    if (strlen(m_destination) == 0)

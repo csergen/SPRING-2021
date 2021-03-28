@@ -1,28 +1,19 @@
 main()
 {
-  int;
-  float;
-  double;
-  char;
-  void;
-  
   int int_variable_001;
   float float_variable_002;
   double double_variable_003;
   char char_variable_004;
-  void void_variable_005;
 
   int_variable_001 = 100;
   float_variable_002 = 200;
   double_variable_003 = 300;
   char_variable_004 = 400;
-  void_variable_005 = 500;
 
   int_variable_001 = 100 + 100 * 100 - 100 / 500 && 100 || 100;
   float_variable_002 = 100 + 100 * 100 - 100 / 500 && 100 || 100;
   double_variable_003 = 100 + 100 * 100 - 100 / 500 && 100 || 100;
   char_variable_004 = 100 + 100 * 100 - 100 / 500 && 100 || 100;
-  void_variable_005 = 100 + 100 * 100 - 100 / 500 && 100 || 100;
 
   int_variable_001 += 10;
   float_variable_002 -= 10;

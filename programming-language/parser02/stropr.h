@@ -22,8 +22,8 @@ void fit(char *string_)
 
    do
    {
-      while ((*m_fitted_string == '\n') ||
-            (*m_fitted_string == '\r'))
+      while ( (*m_fitted_string == '\n') ||  // for LF
+              (*m_fitted_string == '\r' && *(m_fitted_string+1) == '\n') ) // for CRLF
          m_fitted_string++;
    } while ((*string_++ = *m_fitted_string++));
 }

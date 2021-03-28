@@ -89,7 +89,7 @@ static void parse();
 
 void error(char *s)
 {
-  printf(RED"\n\nout: oops, something went wrong 🤔 %s ~~~%s\n%s\n^\n\n" RESET, s, s_current_lexeme, s_current_lexeme);
+  printf(RED"\n\n[Out]: oops, something went wrong 🤔 %s ~~~%s\n%s\n^\n\n" RESET, s, s_current_lexeme, s_current_lexeme);
   exit(true);
 }
 
@@ -302,7 +302,12 @@ factor()
     if (s_current_token != DQUOTE)
       error("missing terminating \" character");
     next_token();
-  } else if (s_current_token == FORMATINT || s_current_token == FORMATCHAR || s_current_token == FORMATFLOAT || s_current_token == FORMATSTRING) {
+  } else if (
+      s_current_token == FORMATINT ||
+      s_current_token == FORMATCHAR ||
+      s_current_token == FORMATFLOAT ||
+      s_current_token == FORMATSTRING ||
+      s_current_token == NEWLINE) {
       next_token();
   }
   else
@@ -420,6 +425,10 @@ assign()
         next_token();
         expression();
         break;
+      case SEMI:
+        break;
+      default:
+        error("unexpected assignment operator");
       }
     }
   }
@@ -441,10 +450,6 @@ sentences()
   {
     switch (s_current_token)
     {
-    case LPAR:
-    case RPAR:
-      error("unexpected character");
-      break;
     case SEMI:
       next_token();
       break;
@@ -474,9 +479,6 @@ sentences()
     case IF:
       ifstmt();
       break;
-    case ELSEIF:
-    case ELSE:
-      error("unexpected definition");
     case FOR:
       forstmt();
       break;
@@ -490,6 +492,8 @@ sentences()
         error("expected ';'");
       next_token();
       break;
+    default:
+      error("syntax error");
     }
   }
 }

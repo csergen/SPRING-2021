@@ -1,7 +1,7 @@
 void main()
 {
   int a = 10;
-  printf("Hello world");
+  printf("Hello\n\n world");
   printf("%d %f %s %c");
   printf("decimal %d flt %f string %s chr %c");
   printf("decimal %d flt %f string %s chr %c", a, b, c, d);
@@ -11,8 +11,8 @@ void main()
   scanf("%s");
   scanf("%c");
   
-  scanf("%d", a);
-  scanf("%f", a);
-  scanf("%s", a);
-  scanf("%c", a);
+  scanf("%d\n%s\n\n\n\n\n\n\n\n%s%f\n%ffhello\nworld\n\n\n\n\n%d", a, b, c, d, e_0214141___10, ___sadsad_24);
+  scanf("\n\n\n\n\n\n%ssshelloworld\n\n\n\n\nthis\n\n\n\nn\n\nnnnnworldilasdoasudaowutoabas", a);
+  scanf("%s\n", a);
+  scanf("%c\n", a);
 }

@@ -6,4 +6,6 @@ Dockerfile
 README.md
 *.gif
 *.png
+*.mp4
+resources/
 cmake-build-debug

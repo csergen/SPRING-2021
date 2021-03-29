@@ -10,13 +10,13 @@ main()
   double_variable_003 = 300;
   char_variable_004 = 400;
 
-  int_variable_001 = 100 + 100 * 100 - 100 / 500 && 100 || 100;
+  int_variable_001 = 100 + 100 * 100 - 100 / 500 && 100 || 10 && 100;
   float_variable_002 = 100 + 100 * 100 - 100 / 500 && 100 || 100;
   double_variable_003 = 100 + 100 * 100 - 100 / 500 && 100 || 100;
   char_variable_004 = 100 + 100 * 100 - 100 / 500 && 100 || 100;
 
   int_variable_001 += 10;
-  float_variable_002 -= 10;
+  float_variable_002 += 10;
   double_variable_003 *= 10;
   char_variable_004 /= 10;
 

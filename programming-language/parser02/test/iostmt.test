@@ -2,11 +2,11 @@ void main()
 {
   int a = 10;
   printf("Hello\n\n world");
-  printf("%d %f %s %c");
-  printf("decimal %d flt %f string %s chr %c");
-  printf("decimal %d flt %f string %s chr %c", a, b, c, d);
+  printf("%d %f %s %s s%sss%sssss");
+  printf("decimal %d flt %f string %s chr %c\n\n\n\n\n\n\n\n\nnnnnnnnnn\n\n\n\n");
+  printf("decimal %d flt %f string %s chr %c", a, b, c, d, e);
 
-  scanf("%d");
+  scanf("%d", a, b, c, d, e, f, g, hg, asd,asd,asd,asd,asd);
   scanf("%f");
   scanf("%s");
   scanf("%c");

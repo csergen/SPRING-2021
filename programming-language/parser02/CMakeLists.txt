@@ -3,4 +3,4 @@ project(Parser C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(Parser parser.c error.h)
+add_executable(Parser parser.c)

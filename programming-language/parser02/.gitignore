@@ -4,6 +4,5 @@
 *.o
 *.exe
 .idea/
-resources/
 .mp4
 cmake-build-debug/

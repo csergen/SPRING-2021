@@ -19,7 +19,7 @@
 ```
 
 ### State Machine Diagram:
-![smd](sm.png)
+![smd](resources/sm.png)
 
 ### Grammar:
 ```html

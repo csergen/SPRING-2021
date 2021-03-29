@@ -57,7 +57,6 @@
 #ifndef __PARSER_H__
 #define __PARSER_H__
 
-#include "tokenizer.h"
 
 // GLOBAL PROPERTIES in Parser
 static TOKEN s_current_token;
@@ -66,6 +65,9 @@ static int s_current_iter;
 static char **s_current_lexemes;
 static int s_size;
 // GLOBAL PROPERTIES in Parser
+
+#include "tokenizer.h"
+#include "error.h"
 
 static void sentences();
 static void scope();
@@ -86,14 +88,7 @@ static void factor();
 static bool ttype();
 static void parse();
 
-
-void error(char *s)
-{
-  printf(RED"\n\n[Out]: oops, something went wrong 🤔 %s ~~~%s\n%s\n^\n\n" RESET, s, s_current_lexeme, s_current_lexeme);
-  exit(true);
-}
-
-static void 
+static void
 next_token()
 {
   if (s_current_iter < s_size)
@@ -151,7 +146,7 @@ iostmt()
       }
 
       if (s_current_token != RPAR)
-        error("expected ')'");
+        error(EXPECTED);
       next_token();
     }
   }
@@ -172,7 +167,7 @@ ifstmt()
       expression();
 
       if (s_current_token != RPAR)
-        error("expected ')'");
+        error(EXPECTED);
       next_token();
       scope();
     }
@@ -187,7 +182,7 @@ ifstmt()
       expression();
 
       if (s_current_token != RPAR)
-        error("expected ')'");
+        error(EXPECTED);
       next_token();
       scope();
       ifstmt();
@@ -200,7 +195,7 @@ ifstmt()
     scope();
 
     if (s_current_token == ELSE)
-      error("unexpected definition");
+      error(UNEXPECTED_DEFINITION);
   }
 }
 
@@ -230,15 +225,15 @@ forstmt()
             next_token();
             scope();
           } else
-              error("expected ')'");
+              error(EXPECTED);
         } else
-            error("expected ';'");
+            error(EXPECTED);
       } else
-          error("expected ';'");
+          error(EXPECTED);
     } else
-        error("expected '('");
+        error(EXPECTED);
   } else
-    error("unexpected definition");
+    error(UNEXPECTED_DEFINITION);
 }
 
 /* <whilestmt>: while ( [<expression>] ) <scope> */
@@ -255,11 +250,11 @@ whilestmt()
         scope();
       }
       else
-        error("expected ')'");
+        error(EXPECTED);
     } else 
-        error("expected '('");
+        error(EXPECTED);
   } else
-      error("unexpected definition");
+      error(UNEXPECTED_DEFINITION);
 }
 
 /* <type>: int | float | double | char | void */
@@ -291,7 +286,7 @@ factor()
     factor();
 
     if (s_current_token != QUOTE)
-      error("missing terminating ' character");
+      error(MISSING);
     next_token();
   }
   else if (s_current_token == DQUOTE)
@@ -300,7 +295,7 @@ factor()
     factor();
 
     if (s_current_token != DQUOTE)
-      error("missing terminating \" character");
+      error(MISSING);
     next_token();
   } else if (
       s_current_token == FORMATINT ||
@@ -311,7 +306,7 @@ factor()
       next_token();
   }
   else
-    error("invalid factor");
+    error(INVALID);
 }
 
 /* {* !a | !0 *}
@@ -428,7 +423,7 @@ assign()
       case SEMI:
         break;
       default:
-        error("unexpected assignment operator");
+        error(UNEXPECTED_ASSIGN_OPERATOR);
       }
     }
   }
@@ -466,15 +461,15 @@ sentences()
     case IDENTIFIER:
       assign();
       if (s_current_token != SEMI)
-        error("expected ';'");
+        error(EXPECTED);
       next_token();
       if (s_current_token == SEMI)
-        error("unexpected character");
+        error(UNEXPECTED_CHARACTER);
       break;
     case NUMBER:
       next_token();
       if (s_current_token != SEMI)
-        error("expected ';'");
+        error(EXPECTED);
       break;
     case IF:
       ifstmt();
@@ -489,11 +484,11 @@ sentences()
     case SCANF:
       iostmt();
       if (s_current_token != SEMI) 
-        error("expected ';'");
+        error(EXPECTED);
       next_token();
       break;
     default:
-      error("syntax error");
+      error(SYNTAX_ERROR);
     }
   }
 }
@@ -507,11 +502,11 @@ scope()
     next_token();
     sentences();
     if (s_current_token != RBRACE)
-      error("expected '}'");
+      error(EXPECTED);
     next_token();
   }
   else
-    error("expected '{'");
+    error(EXPECTED);
 }
 
 /* <program>: [int | void] main () <scope> */
@@ -535,17 +530,17 @@ program()
 
         if (s_current_token != NIL)
         {
-          error("out of scope");
+          error(OUT_OF_SCOPE);
         }
       }
       else
-        error("expected ')'");
+          error(EXPECTED);
     }
     else
-      error("expected '('");
+      error(EXPECTED);
   }
   else
-    error("undefined reference to 'main'");
+    error(UNDEFINED_REFERENCE_MAIN);
 }
 
 static void 

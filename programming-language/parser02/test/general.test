@@ -1,7 +1,7 @@
 int main()
 {
-  int _variable_01 = 10;
-  float _variable_01_02 = 10;
+  int _varable_01 = 10;
+  float _variable_01_02 = 0;
   double __variable_000_0variable = a * b;
   char variable_002 = 'c';
   char _001_var_002__variable = "string";

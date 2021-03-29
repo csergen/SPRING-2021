@@ -90,13 +90,15 @@ NOT: Programin hatasiz cikti verebilmesi icin DOCKER kullanilabilir.
    #endif
 #endif
 
+#ifdef DEBUG
 #define RED   "\x1B[31m"
 #define GRN   "\x1B[32m"
-#define YEL   "\x1B[33m"
-#define BLU   "\x1B[34m"
-#define MAG   "\x1B[35m"
-#define CYN   "\x1B[36m"
 #define RESET "\x1B[0m"
+#else
+#define RED
+#define GRN
+#define RESET
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -130,7 +132,7 @@ int main(int argc, char **argv)
    FILE *m_stream = open(m_file_path, "r");
    char *m_source = read(m_stream);
 
-   printf("\n\n%s\n", m_source);
+   printf("%s\n", m_source);
 
    char **m_lexemes = malloc(sizeof(char*) * length(m_source));
    for (int i = 0; i < length(m_source); i++)
@@ -140,13 +142,13 @@ int main(int argc, char **argv)
    int size;
    size = lexeme(m_source, m_lexemes);
 
-   printf(GRN"\n\n[Out]: 🥳 Voilà. The Lexeme process is successful!\n\n"RESET);
+   printf(GRN"\n\n[Out]: Voilà. The Lexeme process is successful!\n\n"RESET);
    for (int i = 0; i < size; i++)  {
       printf(" %s ", m_lexemes[i]);
    }
 
    parse(size, m_lexemes);
-   printf(GRN"\n\n\n[Out]: 🥳 Voilà. The Parsing process is successful! An Error was not found!\n\n" RESET);
+   printf(GRN"\n\n\n[Out]: Voilà. The Parsing process is successful! An Error was not found!\n\n" RESET);
 
    for (int i = 0; i < size; i++)
       free(m_lexemes[i]);

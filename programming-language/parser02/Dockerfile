@@ -1,8 +1,11 @@
 FROM gcc
 
+RUN apt-get update && apt-get install -y cmake
+
 COPY . /usr/src/parser
-WORKDIR ./usr/src/parser
+RUN mkdir "mkdir cmake-build-debug"
+WORKDIR ./usr/src/parser/cmake-build-debug
+RUN cmake ..
+RUN make
 
-RUN gcc -o parser -I*.h parser.c
-
-CMD ["./parser", "test/general.test"]
+CMD ["./Parser", "../test/general.test"]

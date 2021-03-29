@@ -6,19 +6,16 @@
 
 ## Step two:
 ```console 
-  $ sudo run.sh
-
-  or
-
-  $ sudo systemctl start docker
-  $ sudo docker build -t parser-img .
-  $ sudo docker run -it --rm --name parser parser-img
-  $ sudo systemctl stop docker.socketa
+  $ run.sh [ FOLDER_NAME_OF_INPUT_FILES ]  # run.sh test
+  
+    or 
+  
+  $ run.sh d  # build and run with docker
 
   or
 
   $ gcc -o parser -I*.h parser.c
-  $ ./parser or ./parser <FILE_PATH>
+  $ ./parser or ./parser [INPUT_FILE_PATH]
 ```
 
 ### State Machine Diagram:

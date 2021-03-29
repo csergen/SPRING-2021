@@ -23,6 +23,12 @@ then
    $sudo docker run $DockerRunArgs
    $sudo systemctl stop docker.socket
 else
+   if [ ! -d $1 ]
+   then
+      echo -e "${RED}[ Oops! Folder is not exist. ( -> $1 )]${NC}"
+      exit
+   fi
+
    BuildDir="cmake-build-debug"
 
    if [ ! -d $BuildDir ]
@@ -56,7 +62,8 @@ else
    then
       echo -e "${GRN}[ Parsing done. Please checkout '$BuildDir/$LogDir'${NC} ]"
    else
-      echo -e "${RED}[ Oops! Something went wrong. Please checkout the 'test' file. ]${NC}"
+      echo -e "${RED}[ Oops! Something went wrong. Please checkout the $1 folder. ]${NC}"
+      rm -rf $BuildDir
    fi
    cd ../
 fi

@@ -1,10 +1,10 @@
 # PARSER
 [Github](https://github.com/csergen/SPRING-2021/tree/main/programming-language/parser02)
 
-## Step one:
+
 - [Install docker on Linux](https://docs.docker.com/engine/install/)
 
-## Step two:
+## Build & Run:
 ```console 
   $ run.sh [ FOLDER_NAME_OF_INPUT_FILES ]  # run.sh test
   

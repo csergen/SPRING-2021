@@ -69,30 +69,24 @@ NOT: gcc ile linux uzerinde compile edilirse (70-60%) dogru calisacaktir. (windo
 NOT: Programin hatasiz cikti verebilmesi icin DOCKER kullanilabilir.
    ! Dockerfile icindeki  CMD ["./parser", "KAYNAKDOSYASI"] KAYNAKDOSYASI yerine test edilecek test dosyasinin yolu
    verilebilir. (AYNI DIZINDE veya AYNI DIZIN ICINDEKI DOSYALARIN ALTINDA OLMAK SARTIYLA)
+   
+   bkz: README.md
 
-   $ sudo run.sh                                   // build and run
-
-      or
-
-   $ sudo systemctl start docker                   // start docker
-   $ sudo docker build . -t parser-img             // build image (-t is tag)
-   $ docker run -it --rm --name parser parser-img  // run docker image
-   $ sudo systemctl stop docker.socket             // stop docker
 ********************************************************************************/
 
 #if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
-   #error "WIN does not supported. (ABORTED)"
+#error "WIN does not supported. (ABORTED)"
 #elif defined(__linux__)
-   #define OS "LINUX"
+#define OS "LINUX"
 #else
-   #ifndef OS
-      #error "OS was not recognized. (ABORTED)"
-   #endif
+#ifndef OS
+#error "OS was not recognized. (ABORTED)"
+#endif
 #endif
 
 #ifdef DEBUG
-#define RED   "\x1B[31m"
-#define GRN   "\x1B[32m"
+#define RED "\x1B[31m"
+#define GRN "\x1B[32m"
 #define RESET "\x1B[0m"
 #else
 #define RED
@@ -124,7 +118,7 @@ int main(int argc, char **argv)
       if (strlen(m_file_path) <= 0)
       {
          free(m_file_path);
-         printf(RED"File does not exist!\n"RESET);
+         printf(RED "File does not exist!\n" RESET);
          exit(true);
       }
    }
@@ -134,21 +128,21 @@ int main(int argc, char **argv)
 
    printf("%s\n", m_source);
 
-   char **m_lexemes = malloc(sizeof(char*) * length(m_source));
+   char **m_lexemes = malloc(sizeof(char *) * length(m_source));
    for (int i = 0; i < length(m_source); i++)
       m_lexemes[i] = calloc(0x100, sizeof(char));
-
 
    int size;
    size = lexeme(m_source, m_lexemes);
 
-   printf(GRN"\n\n[Out]: Voilà. The Lexeme process is successful!\n\n"RESET);
-   for (int i = 0; i < size; i++)  {
+   printf(GRN "\n\n[Out]: Voilà. The Lexeme process is successful!\n\n" RESET);
+   for (int i = 0; i < size; i++)
+   {
       printf(" %s ", m_lexemes[i]);
    }
 
    parse(size, m_lexemes);
-   printf(GRN"\n\n\n[Out]: Voilà. The Parsing process is successful! An Error was not found!\n\n" RESET);
+   printf(GRN "\n\n\n[Out]: Voilà. The Parsing process is successful! An Error was not found!\n\n" RESET);
 
    for (int i = 0; i < size; i++)
       free(m_lexemes[i]);

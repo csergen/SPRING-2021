@@ -6,7 +6,7 @@
 
 ## Build & Run:
 ```console 
-  $ run.sh [ FOLDER_NAME_OF_INPUT_FILES ]  # run.sh test
+  $ run.sh [ FOLDER_NAME_OF_INPUT_FILES ]  # ex: run.sh test
   
     or 
   

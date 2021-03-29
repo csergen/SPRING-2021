@@ -66,10 +66,7 @@ PARSERIN TANIMADIGI IFADELER:
       "hello world = 10 " calismaz. vb.
 
 NOT: gcc ile linux uzerinde compile edilirse (70-60%) dogru calisacaktir. (windows'ta (MINGW) calismiyor, karakterler dogru calismiyor.)
-NOT: Programin hatasiz cikti verebilmesi icin DOCKER kullanilabilir.
-   ! Dockerfile icindeki  CMD ["./parser", "KAYNAKDOSYASI"] KAYNAKDOSYASI yerine test edilecek test dosyasinin yolu
-   verilebilir. (AYNI DIZINDE veya AYNI DIZIN ICINDEKI DOSYALARIN ALTINDA OLMAK SARTIYLA)
-   
+NOT: Programin hatasiz cikti verebilmesi icin DOCKER veya cmake kullanilabilir.
    bkz: README.md
 
 ********************************************************************************/

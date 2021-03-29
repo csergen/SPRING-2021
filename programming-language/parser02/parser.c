@@ -65,8 +65,7 @@ PARSERIN TANIMADIGI IFADELER:
       "hello world: " calismaz.
       "hello world = 10 " calismaz. vb.
 
-NOT: gcc ile linux uzerinde compile edilirse (70-60%) dogru calisacaktir. (windows'ta (MINGW) calismiyor, karakterler dogru calismiyor.)
-NOT: Programin hatasiz cikti verebilmesi icin DOCKER veya cmake kullanilabilir.
+NOT: gcc ile linux uzerinde compile edilirse (veya cmake veya docker ile) dogru calisacaktir. (windows'ta (MINGW) calismiyor, karakterler dogru calismiyor.)
    bkz: README.md
 
 ********************************************************************************/

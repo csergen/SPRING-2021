@@ -24,7 +24,7 @@ int main()
                   printf("i %d", i);
                   i++;
                 }
-              i *= a + b + c + d / i;
+                i *= a + b + c + d / i;
               }
                scanf("%d", a);
             }

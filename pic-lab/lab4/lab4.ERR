@@ -1,0 +1,11 @@
+Warning[205] Z:\HOME\ASYNC\REPOS\SPRING-2021\PIC-LAB\LAB4\LAB4.ASM 1 : Found directive in column 1. (LIST)
+Warning[205] Z:\HOME\ASYNC\REPOS\SPRING-2021\PIC-LAB\LAB4\LAB4.ASM 2 : Found directive in column 1. (INCLUDE)
+Warning[203] Z:\HOME\ASYNC\REPOS\SPRING-2021\PIC-LAB\LAB4\LAB4.ASM 8 : Found opcode in column 1. (clrf)
+Warning[203] Z:\HOME\ASYNC\REPOS\SPRING-2021\PIC-LAB\LAB4\LAB4.ASM 9 : Found opcode in column 1. (bsf)
+Warning[203] Z:\HOME\ASYNC\REPOS\SPRING-2021\PIC-LAB\LAB4\LAB4.ASM 10 : Found opcode in column 1. (bcf)
+Warning[203] Z:\HOME\ASYNC\REPOS\SPRING-2021\PIC-LAB\LAB4\LAB4.ASM 11 : Found opcode in column 1. (clrf)
+Message[302] Z:\HOME\ASYNC\REPOS\SPRING-2021\PIC-LAB\LAB4\LAB4.ASM 11 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] Z:\HOME\ASYNC\REPOS\SPRING-2021\PIC-LAB\LAB4\LAB4.ASM 12 : Found opcode in column 1. (bcf)
+Warning[203] Z:\HOME\ASYNC\REPOS\SPRING-2021\PIC-LAB\LAB4\LAB4.ASM 13 : Found opcode in column 1. (bcf)
+Warning[203] Z:\HOME\ASYNC\REPOS\SPRING-2021\PIC-LAB\LAB4\LAB4.ASM 14 : Found opcode in column 1. (bsf)
+Warning[205] Z:\HOME\ASYNC\REPOS\SPRING-2021\PIC-LAB\LAB4\LAB4.ASM 16 : Found directive in column 1. (end)

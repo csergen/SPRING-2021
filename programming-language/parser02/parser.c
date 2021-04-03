@@ -80,15 +80,9 @@ NOT: gcc ile linux uzerinde compile edilirse (veya cmake veya docker ile) dogru 
 #endif
 #endif
 
-#ifdef DEBUG
 #define RED "\x1B[31m"
 #define GRN "\x1B[32m"
 #define RESET "\x1B[0m"
-#else
-#define RED
-#define GRN
-#define RESET
-#endif
 
 #include <stdio.h>
 #include <stdlib.h>

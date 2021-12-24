@@ -1,6 +1,4 @@
 // sergen cepoglu
-// 02190201200
-// info.sergencepoglu@gmail.com | 02190201200@ogr.inonu.edu.tr
 
 /*******************************************************************************
 PARSERIN TANIMADIGI IFADELER:
